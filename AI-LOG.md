@@ -99,3 +99,19 @@ Lock: the runner takes SQLite BEGIN IMMEDIATE, reserving the writer; readers
 continue under WAL. Duration: one ALTER statement and constraint validation
 (proportional to existing rows), not an assumed fixed time. Running v1 expects
 only price, which remains available. The down loses price_vnd data.
+
+## 2026-11-03 — v2 dual write
+
+```
+Tool: Codex
+Asked for: Build v2 and pass tests and smoke traffic before tagging.
+Kept: Shared money helpers, input validation for both client shapes, dual writes on POST/PATCH, price-based reads, and six tests retaining the original price assertions.
+Changed: nothing
+Rejected: nothing
+By hand: nothing
+```
+
+Six tests passed. Eight seconds of scratch traffic at NEW_CLIENTS=0.3 completed
+4115 requests with zero failures. The check reported 1341 NULLs and zero
+disagreement, expected before backfill. Evidence: `.ia2/build/v2-traffic.txt`
+and `.ia2/build/v2-commands.txt`. Only src/ and test/ change application behavior.
