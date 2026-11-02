@@ -13,11 +13,11 @@
 // does not show the last acknowledged write ("stale"), and any moment when NO
 // instance answers ("unavailable"). One instance being down while another
 // answers is a rolling restart, not a failure — it is counted as "rerouted".
-import { appendFileSync } from 'node:fs';
+import { appendFileSync, readFileSync } from 'node:fs';
 
 const TARGETS = (process.env.TARGETS ?? 'http://localhost:3001,http://localhost:3002').split(',');
 const DURATION = Number(process.env.DURATION ?? 0);
-const NEW_CLIENTS = Number(process.env.NEW_CLIENTS ?? 0);
+let NEW_CLIENTS = Number(process.env.NEW_CLIENTS ?? 0);
 const IDS = Number(process.env.IDS ?? 2000);
 const LOG = process.env.LOG ?? 'traffic-log.txt';
 const WORKERS = 8;
@@ -159,6 +159,21 @@ for (let id = 1; id <= FIXED; id++) {
 }
 
 log(`\n=== traffic start ${new Date().toISOString()} · targets ${TARGETS.join(' ')} · new clients ${NEW_CLIENTS}`);
+// IA#2 tooling: optional runtime control of NEW_CLIENTS. If NEW_CLIENTS_FILE is set, the number (0..1)
+// in that file replaces NEW_CLIENTS whenever it changes, and the change is logged. Without it nothing changes.
+const NEW_CLIENTS_FILE = process.env.NEW_CLIENTS_FILE;
+if (NEW_CLIENTS_FILE)
+  setInterval(() => {
+    try {
+      const v = Number(readFileSync(NEW_CLIENTS_FILE, "utf8").trim());
+      if (Number.isFinite(v) && v >= 0 && v <= 1 && v !== NEW_CLIENTS) {
+        NEW_CLIENTS = v;
+        log(`${ts()} new clients → ${v}`);
+      }
+    } catch {
+      /* missing or half-written file: keep the current value */
+    }
+  }, 1000).unref();
 let stop = false;
 process.on('SIGINT', () => { stop = true; });
 if (DURATION) setTimeout(() => { stop = true; }, DURATION * 1000);
