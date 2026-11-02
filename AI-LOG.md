@@ -171,3 +171,39 @@ scratch database, check was CONSISTENT and the unchanged v4 served traffic.
 Migration 003 did not exist yet and was not added to this version commit.
 Evidence: `.ia2/build/v4-commands.txt`, `.ia2/build/v4-traffic.txt`,
 `.ia2/build/v4-dropped-commands.txt`, `.ia2/build/v4-dropped-traffic.txt`.
+
+## 2026-11-03 — Contract migration 003 and build matrix
+
+```
+Tool: Codex
+Asked for: Add guarded migration 003 and down migration, verify every version and stop at G1.
+Kept: Transactional NULL guard, drop of price, and explicitly lossy down SQL reconstructing thousands from price_vnd.
+Changed: nothing
+Rejected: nothing
+By hand: The human approved the required sandbox escalation requests. No official command has run.
+```
+
+On scratch contract.db, the intentional missing-backfill case failed with
+NOT NULL constraint failed: _guard_price_vnd.x; the whole transaction rolled
+back, price remained present, the guard table was absent, and 003 remained
+pending. After backfill from the v3 worktree, up/check/down/check/up all passed.
+The down restored price and check returned CONSISTENT. Actual 003 traffic on v4
+completed 3764 requests with zero failures and a final CONSISTENT verdict.
+Evidence: `.ia2/build/contract-checks.txt` lines 1–92 and
+`.ia2/build/contract-traffic.txt` lines 2–5.
+
+Lock: BEGIN IMMEDIATE reserves the SQLite writer for the guard and ALTER.
+Duration: the transaction includes the NULL scan and table rewrite for DROP
+COLUMN, so it scales with row count; no fixed production duration is claimed.
+WAL readers can continue; concurrent writes may wait within busy_timeout.
+Every running instance must be v4, which expects only price_vnd. The down is
+lossy and does not recover original sub-dong float digits.
+
+All four worktrees were recreated and verified against their tags. Final test
+matrix passed: v1=4, v2=6, v3=7, v4=7 (001+002), main=7 (001+002+003).
+Raw matrix evidence: `.ia2/build/matrix.txt` lines 1–101. Down-test 002 was also
+repeated through the orchestrator using its designated worktrees; its labeled
+check was CONSISTENT. No application file was changed in this migration commit.
+Phase 1 is ready for G1 review; G1 has not been approved. The full S0–S8
+rehearsal, freeze, push, and official run have not started. All verification in
+this phase was performed by the agent on scratch databases and ports.
