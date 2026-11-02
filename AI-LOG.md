@@ -540,3 +540,45 @@ source, migration, test, tag or raw evidence changed. G4 has not been approved;
 no zip is authorized or created. The agent will stop after saving and pushing
 this documentation change and wait for the independent review. The candidate
 name, only if 100 is later finalized, would be 23127449_100.zip.
+
+## 2026-11-03 — Independent session review of the 100-point claim
+
+```
+Tool: Codex
+Asked for: Independently reassess SELF_ASSESSMENT_REPORT.md against every rubric condition, verify clear evidence and required submission files, and identify any justified deductions before packaging.
+Kept: The six criterion scores of 20, 20, 15, 20, 15 and 10, supported by source/tag inspection, raw official evidence and a fresh full scratch replay.
+Changed: Report and rubric-audit status now record completion of the independent session review; final human score approval and G4 remain pending.
+Rejected: Deducting points for unrequired exhaustive undo testing or treating the disclosed traffic extension as a prohibited change without a rubric rule.
+By hand: The human requested the audit, confirmed Phase 4 with go, and approved unrestricted scratch replay execution. Every original official command was run by the human, as recorded in the existing ledger; this session ran no official command.
+```
+
+The agent inspected git log and git diff first; the working tree was initially
+clean at 3ecf34a. Four annotated tags and their migration inventories matched
+the plan, v1 matched the locally recorded upstream/main, and protected starter
+files were unchanged in Git. Both official logs matched their first evidence
+commit 3a682e3 byte for byte. One official traffic header, ten sequential paired
+down/back transitions, the share change to 0.3 and all-zero failure counters
+were independently checked. The official final count remains 421762.
+
+The first scratch replay attempt stalled during v1 HTTP tests inside the
+restricted sandbox and was interrupted with exit 130. The approved unrestricted
+attempt ran the unchanged docs/replay.sh with a 300-second timeout and exited 0.
+It cloned 3ecf34a into /tmp/ia2-replay.8w6Avi/repo, used a scratch database and
+ports 4001/4002, and invoked no orchestrator. Tests passed: v1=4, v2=6, v3=7,
+v4=7, main=7. Backfill stopped at 5000, resumed with 13898 updates, and repeated
+with zero updates. Strict checks passed after backfill, before/during/after the
+rollback drill, and after 003. Ten actual post-drop HTTP probe responses passed.
+Final traffic: 78106 successful requests, error=0, contract=0, stale=0,
+unavailable=0, rerouted=90; RESULT: zero failed requests. Replay worktrees were
+removed and servers stopped. Raw local verification output is
+/tmp/ia2-independent-review-replay-unrestricted.log (results at 784-786);
+scratch traffic is /tmp/ia2-replay.8w6Avi/run/traffic-log.txt. These temporary
+files supplement the already committed replay evidence; they are not required
+submission artifacts and do not replace or alter either official root log.
+
+All rubric-required repository contents are tracked, including all migration
+pairs, the backfill, English documents and raw logs; .git connectivity passed.
+The final zip has not been built or inspected. The runtime traffic-control
+extension remains disclosed; course acceptance and oral understanding cannot
+be certified by this audit. No evidence-backed deduction was identified under
+the supplied six criteria. G4 and final human approval remain pending.

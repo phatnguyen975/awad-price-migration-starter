@@ -5,7 +5,11 @@ based on implementation at the frozen tags, the original checker/traffic
 logic, human-run official evidence and an independent scratch replay.
 Machine-readable results: docs/evidence-audit.json. This is a self-assessment,
 not a statement of an awarded grade or an oral-exam result. The revised 100/100
-claim is provisional, pending independent session review and final human approval.
+claim was supported by an independent session review on 2026-11-03 and remains
+subject to final human approval. That session repeated the full scratch replay:
+all five test suites passed, followed by 78106 successful requests and zero
+error/contract/stale/unavailable failures. See the final AI-LOG.md entry for
+the scope and local verification artifacts.
 G4 and zip creation are not authorized by this revision.
 
 ## Criterion-by-criterion findings
@@ -30,8 +34,8 @@ new experiments were performed or existing logs were changed.
 
 All stated top-band conditions currently have evidence, supporting a proposed
 20/20 for the plan and 100/100 overall. The limitations below remain disclosed;
-this draft is deliberately subject to an independent review before the human
-settles the score. The course remains responsible for the awarded mark.
+the independent session review also supports this score. Final human approval
+remains pending. The course remains responsible for the awarded mark.
 
 ## Why the evidence is more than printed PASS text
 
