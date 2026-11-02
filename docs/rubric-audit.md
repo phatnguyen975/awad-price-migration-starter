@@ -5,12 +5,12 @@ based on implementation at the frozen tags, the original checker/traffic
 logic, human-run official evidence and an independent scratch replay.
 Machine-readable results: docs/evidence-audit.json. This is a self-assessment,
 not a statement of an awarded grade or an oral-exam result. The revised 100/100
-claim was supported by an independent session review on 2026-11-03 and remains
-subject to final human approval. That session repeated the full scratch replay:
+claim was supported by an independent session review on 2026-11-03 and then
+approved by the human for submission and G4 packaging. That session repeated the full scratch replay:
 all five test suites passed, followed by 78106 successful requests and zero
-error/contract/stale/unavailable failures. See the final AI-LOG.md entry for
+error/contract/stale/unavailable failures. See the AI-LOG.md independent-review entry for
 the scope and local verification artifacts.
-G4 and zip creation are not authorized by this revision.
+G4 packaging was subsequently authorized by the human after that review.
 
 ## Criterion-by-criterion findings
 
@@ -34,8 +34,8 @@ new experiments were performed or existing logs were changed.
 
 All stated top-band conditions currently have evidence, supporting a proposed
 20/20 for the plan and 100/100 overall. The limitations below remain disclosed;
-the independent session review also supports this score. Final human approval
-remains pending. The course remains responsible for the awarded mark.
+the independent session review also supports this score and the human has
+approved it for submission. The course remains responsible for the awarded mark.
 
 ## Why the evidence is more than printed PASS text
 
@@ -80,7 +80,8 @@ are supplemental; they are not substituted into the official root logs.
   machine-specific and restore means copy plus check, not production failover.
 - Oral understanding and final human ownership are not machine-verifiable.
   docs/explain.md was provided and the human was asked for an explanation.
-- At this audit, G4 and zip creation remain pending; do not claim the zip exists.
+- G4 has been approved after independent review. Archive verification is a
+  separate packaging check recorded in AI-LOG.md, not evidence of extra marks.
 
 ## AI-LOG review
 

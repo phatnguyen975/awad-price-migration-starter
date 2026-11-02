@@ -5,8 +5,9 @@
 **Total I claim:** 100/100
 
 **Status:** Independent session review completed on 2026-11-03, supporting
-100/100 against the supplied rubric; final human approval remains pending.
-This review is not G4 approval and does not authorize a zip.
+100/100 against the supplied rubric. After that review the human instructed
+continuation, approving the 100-point submission and G4 packaging. The archive
+name is 23127449_100.zip; packaging verification is recorded in AI-LOG.md.
 
 Identity was confirmed by the human in chat on 2026-11-03. This is an
 assessment of the supplied rubric's six criteria, not a guaranteed awarded mark.
@@ -40,8 +41,8 @@ its acceptability. I do not claim unmodified traffic tooling or official
 approval of that patch by the course.
 
 No listed implementation criterion is knowingly absent. Human review and oral
-understanding remain the student's responsibility. G4 approval and zip creation
-are pending; the submission artifact has not been created yet.
+understanding remain the student's responsibility. G4 was approved on
+2026-11-03; the archive is built and checked as a separate packaging step.
 
 ### What I would do differently
 

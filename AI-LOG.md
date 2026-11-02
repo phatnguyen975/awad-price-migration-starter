@@ -582,3 +582,23 @@ The final zip has not been built or inspected. The runtime traffic-control
 extension remains disclosed; course acceptance and oral understanding cannot
 be certified by this audit. No evidence-backed deduction was identified under
 the supplied six criteria. G4 and final human approval remain pending.
+
+## 2026-11-03 — G4 approval after independent review
+
+```
+Tool: Codex
+Asked for: Continue to the next step after the human reported a separate session review still supported 100/100.
+Kept: The independent review at commit 0153a0d, the 100-point assessment and all original implementation/evidence.
+Changed: Report, rubric-audit and ledger now record human approval of the final self-assessment and G4 packaging, replacing their current pending status. Historical entries remain unchanged.
+Rejected: nothing
+By hand: The human reported completion of the separate review and explicitly instructed continuing after the prior hold; the agent stated that this approves finalizing 100 and creating the zip before acting.
+```
+
+At the start, main and origin/main were both 0153a0d and the working tree was
+clean. The original official logs still matched their SHA256 audit and first
+evidence commit 3a682e3. Frozen code and all four annotated tags were unchanged.
+Only the main worktree remained and .git/worktrees was absent or empty.
+The score arithmetic is 20+20+15+20+15+10=100. The package will be named
+23127449_100.zip, include .git, and exclude .ia2, data and node_modules.
+The human ran every official command; the agent's rehearsal and replay used
+scratch databases. No new official command or live-database access was needed.
