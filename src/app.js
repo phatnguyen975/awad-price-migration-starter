@@ -1,7 +1,7 @@
 import { createServer } from 'node:http';
 import { toVnd, toThousands } from './money.js';
 
-// v3 reads price_vnd and maintains both columns for safe rollback to v2.
+// v4 uses only price_vnd in storage; the legacy price field remains in the API.
 
 const json = (res, status, body) => {
   res.writeHead(status, { 'content-type': 'application/json' });
@@ -41,8 +41,8 @@ export function createApp(db) {
   const q = {
     list: db.prepare('SELECT id, name, price_vnd FROM menu_items ORDER BY id LIMIT ? OFFSET ?'),
     get: db.prepare('SELECT id, name, price_vnd FROM menu_items WHERE id = ?'),
-    insert: db.prepare('INSERT INTO menu_items (name, price, price_vnd) VALUES (?, ?, ?)'),
-    setPrice: db.prepare('UPDATE menu_items SET price = ?, price_vnd = ? WHERE id = ?'),
+    insert: db.prepare('INSERT INTO menu_items (name, price_vnd) VALUES (?, ?)'),
+    setPrice: db.prepare('UPDATE menu_items SET price_vnd = ? WHERE id = ?'),
     insertOrder: db.prepare("INSERT INTO orders (created_at) VALUES (datetime('now'))"),
     insertLine: db.prepare('INSERT INTO order_items (order_id, menu_item_id, qty, unit_price) VALUES (?, ?, ?, ?)'),
   };
@@ -66,7 +66,7 @@ export function createApp(db) {
         const p = parsePrice(body);
         if (!body || typeof body.name !== 'string' || !body.name || !p)
           return error(res, 400, 'invalid_body', 'name (string) and price (thousands of dong) or priceVnd (dong) are required');
-        const { lastInsertRowid } = q.insert.run(body.name, p.price, p.priceVnd);
+        const { lastInsertRowid } = q.insert.run(body.name, p.priceVnd);
         return json(res, 201, view(q.get.get(lastInsertRowid)));
       }
     }
@@ -81,7 +81,7 @@ export function createApp(db) {
         const p = parsePrice(body);
         if (!p)
           return error(res, 400, 'invalid_body', 'price (thousands of dong) or priceVnd (dong) is required');
-        q.setPrice.run(p.price, p.priceVnd, id);
+        q.setPrice.run(p.priceVnd, id);
         return json(res, 200, view(q.get.get(id)));
       }
     }

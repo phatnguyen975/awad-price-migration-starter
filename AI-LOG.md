@@ -151,3 +151,23 @@ Seven tests passed, including the original total=97 assertion. Eight seconds
 of scratch traffic at NEW_CLIENTS=0.3 completed 3636 requests with zero failures.
 The backfilled scratch database ended CONSISTENT. Evidence:
 `.ia2/build/v3-commands.txt`, `.ia2/build/v3-traffic.txt`.
+
+## 2026-11-03 — v4 new-column storage only
+
+```
+Tool: Codex
+Asked for: Build v4 with tests and smoke traffic before tagging.
+Kept: INSERT/UPDATE use only price_vnd; legacy API price is derived. Tests check NULL or unchanged legacy storage when that column exists and work after it is dropped.
+Changed: The v3 disagreement fixture now conditionally creates legacy disagreement so the test also works without the old column.
+Rejected: nothing
+By hand: nothing
+```
+
+Seven tests passed with 001+002. Both eight-second scratch smoke runs at 30%
+new clients had zero failures: 4012 requests before drop and 3802 after drop.
+Before drop, check deliberately returned INCONSISTENT (676 stale legacy rows),
+the expected point-of-no-return behavior. After a one-off drop on a separate
+scratch database, check was CONSISTENT and the unchanged v4 served traffic.
+Migration 003 did not exist yet and was not added to this version commit.
+Evidence: `.ia2/build/v4-commands.txt`, `.ia2/build/v4-traffic.txt`,
+`.ia2/build/v4-dropped-commands.txt`, `.ia2/build/v4-dropped-traffic.txt`.
