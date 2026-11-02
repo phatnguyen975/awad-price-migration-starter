@@ -46,3 +46,10 @@ human; the agent has run no official-mode command and created no root log file.
 - traffic-log.txt lines: 1–3 | counters at the end: 0 / 0 / 0 / 0
 - check-log label: S0-baseline → CONSISTENT
 - Notes: none
+
+## S1 Expand — 2026-11-02T21:55:57.208Z
+- Instances: v1 / v1 | git 2acf595
+- Command (run by the human): node scripts/ia2/run.js official s1
+- traffic-log.txt lines: 26–26 | counters at the end: 0 / 0 / 0 / 0
+- check-log label: S1-expand → CONSISTENT, but 21127 rows have no price_vnd yet — nothing may read price_vnd until they do; S1-down-test-002 → CONSISTENT
+- Notes: none

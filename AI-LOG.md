@@ -298,3 +298,24 @@ Step evidence: traffic-log.txt lines 1–3, check-log.txt lines 1–5,
 docs/ledger.md lines 43–48. Subsequent traffic remained clean when inspected.
 The agent ran no official command, did not touch the live database, and did not
 write or edit either root log. The rehearsal was run earlier on scratch data.
+
+## 2026-11-03 — Official S1 validation
+
+```
+Tool: Codex
+Asked for: Verify the human's completed S1 and provide the next official step.
+Kept: Read-only audit of official state, expand check, down-tests 001/002, traffic and the S1 ledger entry.
+Changed: nothing
+Rejected: nothing
+By hand: The human ran node scripts/ia2/run.js official s1 and reported completion.
+```
+
+S1 PASS: both instances remain v1. S1-expand reports CONSISTENT with remaining
+NULL price_vnd values, as expected before backfill. Both down-tests reverted
+their migrations on separate scratch databases; S1-down-test-002 is CONSISTENT.
+Evidence: traffic-log.txt line 26, check-log.txt lines 6–42,
+docs/ledger.md lines 50–55. All traffic failure counters remained zero through
+the read-only audit. The checker reads counts in separate queries under live
+traffic, so the rows count and NULL count may differ by a concurrent insertion.
+The agent ran no official command and did not write either raw log or touch the
+live database. The earlier rehearsal ran on scratch databases.
