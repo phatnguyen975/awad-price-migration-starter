@@ -88,3 +88,10 @@ human; the agent has run no official-mode command and created no root log file.
 - traffic-log.txt lines: 160–168 | counters at the end: 0 / 0 / 0 / 0
 - check-log label: S6-A-v4 → INCONSISTENT; S6-both-v4 → INCONSISTENT
 - Notes: S6-A-v4: INCONSISTENT (expected by playbook); S6-both-v4: INCONSISTENT (expected by playbook)
+
+## S7 Contract — 2026-11-02T22:07:23.836Z
+- Instances: v4 / v4 | git 9495f68
+- Command (run by the human): node scripts/ia2/run.js official s7 --go
+- traffic-log.txt lines: 182–182 | counters at the end: 0 / 0 / 0 / 0
+- check-log label: S7-backup → INCONSISTENT; S7-down-test-003 → CONSISTENT; S7-after-drop → CONSISTENT
+- Notes: S7-backup: INCONSISTENT (expected by playbook); VACUUM INTO backup=881ms; restore copy and check=564ms; file=/mnt/c/Users/Admin/Projects/awad-price-migration-starter/.ia2/backup-s7-1793657238486.db; Old-client probe passed on both instances: GET item/list, POST item, PATCH item, POST order

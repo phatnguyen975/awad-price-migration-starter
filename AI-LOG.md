@@ -415,3 +415,24 @@ check-log.txt lines 171–186 and explained in docs/ledger.md lines 85–90.
 G3b has not been approved; S7 must wait for explicit approval before dropping
 price. The agent ran no official command and changed neither the live database
 nor raw logs. The earlier rehearsal was run on scratch databases and ports.
+
+## 2026-11-03 — G3b approval and official S7 validation
+
+```
+Tool: Codex
+Asked for: Proceed after explicit G3b approval, then verify the human's completed S7.
+Kept: S7 guidance and read-only audit of backup timing, restored-copy checks, down-test 003, post-drop consistency, endpoint probe notes and traffic.
+Changed: nothing
+Rejected: nothing
+By hand: The human explicitly said go G3b, ran node scripts/ia2/run.js official s7 --go, and reported completion.
+```
+
+S7 PASS: both instances remain v4. VACUUM INTO took 881ms; copying and checking
+the restored backup took 564ms. S7-backup is INCONSISTENT as expected from stale
+price. Down-test 003 reverted on a separate scratch copy and returned CONSISTENT.
+S7-after-drop lists only id/name/price_vnd and is CONSISTENT with exit 0.
+Old-client probes passed on both instances. Evidence: check-log.txt lines
+187–219, traffic-log.txt line 182, docs/ledger.md lines 92–97.
+Traffic failure counters remained zero through the audit. The agent ran no
+official command, edited no raw log and did not touch the live database.
+The earlier rehearsal used scratch databases and ports.
