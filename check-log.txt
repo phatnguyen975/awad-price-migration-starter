@@ -1,0 +1,219 @@
+===== CHECK S0-baseline | 2026-11-02T21:53:56.415Z | A=v1 B=v1 | git 3ca58e0 =====
+columns                id, name, price
+rows                   20035
+CONSISTENT
+exit=0
+===== CHECK S1-expand | 2026-11-02T21:55:53.574Z | A=v1 B=v1 | git 2acf595 =====
+columns                id, name, price, price_vnd
+rows                   21126
+price_vnd_null         21127
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT, but 21127 rows have no price_vnd yet — nothing may read price_vnd until they do
+exit=0
+===== DOWN-TEST 001 | DB_PATH=/mnt/c/Users/Admin/Projects/awad-price-migration-starter/.ia2/down-test-001-1793656553854.db =====
+$ npm run migrate (cwd=/mnt/c/Users/Admin/Projects/ia2-v1)
+applied  001_init
+$ npm run migrate:status (cwd=/mnt/c/Users/Admin/Projects/ia2-v1)
+db /mnt/c/Users/Admin/Projects/awad-price-migration-starter/.ia2/down-test-001-1793656553854.db
+[x] 001_init
+$ npm run migrate:down (cwd=/mnt/c/Users/Admin/Projects/ia2-v1)
+reverted 001_init
+$ npm run migrate:status (cwd=/mnt/c/Users/Admin/Projects/ia2-v1)
+db /mnt/c/Users/Admin/Projects/awad-price-migration-starter/.ia2/down-test-001-1793656553854.db
+[ ] 001_init
+===== DOWN-TEST 002 | DB_PATH=/mnt/c/Users/Admin/Projects/awad-price-migration-starter/.ia2/down-test-002-1793656555522.db =====
+$ npm run migrate (cwd=/mnt/c/Users/Admin/Projects/ia2-v1)
+applied  001_init
+$ npm run seed -- 1000 (cwd=/mnt/c/Users/Admin/Projects/ia2-v1)
+seeded 1000 menu items
+$ npm run migrate (cwd=/mnt/c/Users/Admin/Projects/ia2-v2)
+applied  002_add_price_vnd
+$ npm run migrate:down (cwd=/mnt/c/Users/Admin/Projects/ia2-v2)
+reverted 002_add_price_vnd
+$ npm run migrate:status (cwd=/mnt/c/Users/Admin/Projects/ia2-v2)
+db /mnt/c/Users/Admin/Projects/awad-price-migration-starter/.ia2/down-test-002-1793656555522.db
+[x] 001_init
+[ ] 002_add_price_vnd
+===== CHECK S1-down-test-002 | 2026-11-02T21:55:57.131Z | A=v1 B=v1 | git 2acf595 =====
+columns                id, name, price
+rows                   1000
+CONSISTENT
+exit=0
+===== CHECK S2-A-v2 | 2026-11-02T21:58:23.999Z | A=v2 B=v1 | git fb29bf9 =====
+columns                id, name, price, price_vnd
+rows                   22581
+price_vnd_null         22079
+price_vnd_not_integer  0
+disagree               67
+INCONSISTENT
+exit=1
+===== CHECK S2-both-v2 | 2026-11-02T21:58:36.448Z | A=v2 B=v2 | git fb29bf9 =====
+columns                id, name, price, price_vnd
+rows                   22701
+price_vnd_null         21361
+price_vnd_not_integer  0
+disagree               35
+INCONSISTENT
+exit=1
+===== CHECK S3-before-backfill | 2026-11-02T22:00:00.617Z | A=v2 B=v2 | git abe1cd0 =====
+columns                id, name, price, price_vnd
+rows                   23502
+price_vnd_null         20585
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT, but 20585 rows have no price_vnd yet — nothing may read price_vnd until they do
+exit=0
+===== BACKFILL | 2026-11-02T22:00:01.568Z =====
+batch 1: 500 rows (total 500)
+batch 2: 500 rows (total 1000)
+batch 3: 500 rows (total 1500)
+batch 4: 500 rows (total 2000)
+batch 5: 500 rows (total 2500)
+batch 6: 500 rows (total 3000)
+batch 7: 500 rows (total 3500)
+batch 8: 500 rows (total 4000)
+batch 9: 500 rows (total 4500)
+batch 10: 500 rows (total 5000)
+STOPPED updated=5000 batches=10
+===== CHECK S3-partial | 2026-11-02T22:00:02.124Z | A=v2 B=v2 | git abe1cd0 =====
+columns                id, name, price, price_vnd
+rows                   23508
+price_vnd_null         15585
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT, but 15585 rows have no price_vnd yet — nothing may read price_vnd until they do
+exit=0
+===== BACKFILL | 2026-11-02T22:00:06.607Z =====
+batch 1: 500 rows (total 500)
+batch 2: 500 rows (total 1000)
+batch 3: 500 rows (total 1500)
+batch 4: 500 rows (total 2000)
+batch 5: 500 rows (total 2500)
+batch 6: 500 rows (total 3000)
+batch 7: 500 rows (total 3500)
+batch 8: 500 rows (total 4000)
+batch 9: 500 rows (total 4500)
+batch 10: 500 rows (total 5000)
+batch 11: 500 rows (total 5500)
+batch 12: 500 rows (total 6000)
+batch 13: 500 rows (total 6500)
+batch 14: 500 rows (total 7000)
+batch 15: 500 rows (total 7500)
+batch 16: 500 rows (total 8000)
+batch 17: 500 rows (total 8500)
+batch 18: 500 rows (total 9000)
+batch 19: 500 rows (total 9500)
+batch 20: 500 rows (total 10000)
+batch 21: 500 rows (total 10500)
+batch 22: 500 rows (total 11000)
+batch 23: 500 rows (total 11500)
+batch 24: 500 rows (total 12000)
+batch 25: 500 rows (total 12500)
+batch 26: 500 rows (total 13000)
+batch 27: 500 rows (total 13500)
+batch 28: 500 rows (total 14000)
+batch 29: 500 rows (total 14500)
+batch 30: 500 rows (total 15000)
+batch 31: 500 rows (total 15500)
+batch 32: 85 rows (total 15585)
+DONE updated=15585 batches=32
+===== CHECK S3-after-backfill | 2026-11-02T22:00:07.112Z | A=v2 B=v2 | git abe1cd0 =====
+columns                id, name, price, price_vnd
+rows                   23541
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT
+exit=0
+===== BACKFILL | 2026-11-02T22:00:07.612Z =====
+DONE updated=0 batches=0
+===== CHECK S4-A-v3 | 2026-11-02T22:01:40.225Z | A=v3 B=v2 | git 29173be =====
+columns                id, name, price, price_vnd
+rows                   24371
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT
+exit=0
+===== CHECK S4-both-v3 | 2026-11-02T22:01:53.098Z | A=v3 B=v3 | git 29173be =====
+columns                id, name, price, price_vnd
+rows                   24468
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT
+exit=0
+===== CHECK S5-before | 2026-11-02T22:02:50.014Z | A=v3 B=v3 | git 24f661c =====
+columns                id, name, price, price_vnd
+rows                   25024
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT
+exit=0
+===== CHECK S5-on-v2 | 2026-11-02T22:03:14.036Z | A=v2 B=v2 | git 24f661c =====
+columns                id, name, price, price_vnd
+rows                   25277
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT
+exit=0
+===== CHECK S5-after | 2026-11-02T22:03:38.267Z | A=v3 B=v3 | git 24f661c =====
+columns                id, name, price, price_vnd
+rows                   25502
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT
+exit=0
+===== CHECK S6-A-v4 | 2026-11-02T22:05:59.862Z | A=v4 B=v3 | git c880370 =====
+columns                id, name, price, price_vnd
+rows                   26826
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               418
+INCONSISTENT
+exit=1
+===== CHECK S6-both-v4 | 2026-11-02T22:06:12.394Z | A=v4 B=v4 | git c880370 =====
+columns                id, name, price, price_vnd
+rows                   26951
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               1117
+INCONSISTENT
+exit=1
+===== CHECK S7-backup | 2026-11-02T22:07:19.858Z | A=v4 B=v4 | git 9495f68 =====
+columns                id, name, price, price_vnd
+rows                   27563
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               1909
+INCONSISTENT
+exit=1
+===== DOWN-TEST 003 | DB_PATH=/mnt/c/Users/Admin/Projects/awad-price-migration-starter/.ia2/down-test-003-1793657240094.db =====
+$ npm run migrate (cwd=/mnt/c/Users/Admin/Projects/awad-price-migration-starter)
+applied  003_drop_price
+$ npm run migrate:down (cwd=/mnt/c/Users/Admin/Projects/awad-price-migration-starter)
+reverted 003_drop_price
+$ npm run migrate:status (cwd=/mnt/c/Users/Admin/Projects/awad-price-migration-starter)
+db /mnt/c/Users/Admin/Projects/awad-price-migration-starter/.ia2/down-test-003-1793657240094.db
+[x] 001_init
+[x] 002_add_price_vnd
+[ ] 003_drop_price
+===== CHECK S7-down-test-003 | 2026-11-02T22:07:22.186Z | A=v4 B=v4 | git 9495f68 =====
+columns                id, name, price_vnd, price
+rows                   27563
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT
+exit=0
+===== CHECK S7-after-drop | 2026-11-02T22:07:23.294Z | A=v4 B=v4 | git 9495f68 =====
+columns                id, name, price_vnd
+rows                   27592
+price_vnd_null         0
+price_vnd_not_integer  0
+CONSISTENT
+exit=0
