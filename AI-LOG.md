@@ -319,3 +319,21 @@ the read-only audit. The checker reads counts in separate queries under live
 traffic, so the rows count and NULL count may differ by a concurrent insertion.
 The agent ran no official command and did not write either raw log or touch the
 live database. The earlier rehearsal ran on scratch databases.
+
+## 2026-11-03 — Official S2 validation
+
+```
+Tool: Codex
+Asked for: Verify the human's completed S2 and guide the next step.
+Kept: Read-only audit of the two rolling restarts, runtime share change, check results and S2 ledger entry.
+Changed: nothing
+Rejected: nothing
+By hand: The human ran node scripts/ia2/run.js official s2 and reported completion.
+```
+
+S2 PASS: both instances run v2. Traffic lines 54–63 contain exactly one down/back
+pair for each instance and the share change to 0.3 after both recovered.
+Check-log.txt lines 43–58 contain the two expected INCONSISTENT verdicts;
+docs/ledger.md lines 57–62 explicitly explain them. All traffic failure counters
+remained zero through the audit. The agent ran no official command and changed
+neither the raw logs nor the live database. Rehearsal was on scratch databases.

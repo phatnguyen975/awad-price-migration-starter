@@ -53,3 +53,10 @@ human; the agent has run no official-mode command and created no root log file.
 - traffic-log.txt lines: 26–26 | counters at the end: 0 / 0 / 0 / 0
 - check-log label: S1-expand → CONSISTENT, but 21127 rows have no price_vnd yet — nothing may read price_vnd until they do; S1-down-test-002 → CONSISTENT
 - Notes: none
+
+## S2 Dual write — 2026-11-02T21:58:36.995Z
+- Instances: v2 / v2 | git fb29bf9
+- Command (run by the human): node scripts/ia2/run.js official s2
+- traffic-log.txt lines: 54–63 | counters at the end: 0 / 0 / 0 / 0
+- check-log label: S2-A-v2 → INCONSISTENT; S2-both-v2 → INCONSISTENT
+- Notes: S2-A-v2: INCONSISTENT (expected by playbook); S2-both-v2: INCONSISTENT (expected by playbook)
