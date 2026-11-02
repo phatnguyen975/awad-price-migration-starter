@@ -66,3 +66,17 @@ checks passed, and status reported traffic and both rehearsal servers stopped.
 Only the prescribed traffic patch and the new scripts/ia2 directory change
 executable code. Phase 0 is ready for G0 review; no G0 approval has been given,
 no push has occurred, and Phase 1 has not started.
+
+## 2026-11-03 — G0 approval and Phase 1 inventory
+
+```
+Tool: Codex
+Asked for: Complete inventory, build migrations and v2/v3/v4 with tests and smoke runs, and stop at G1.
+Kept: docs/inventory.md based on the starter files, git history, and observed Phase 0 checks.
+Changed: nothing
+Rejected: nothing
+By hand: The human approved G0 and authorized Phase 1 in chat.
+```
+
+All required starter files were read. No unexpected difference was found.
+The earlier smoke rehearsal used scratch databases; no official command has run.
