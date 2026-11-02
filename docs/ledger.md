@@ -60,3 +60,10 @@ human; the agent has run no official-mode command and created no root log file.
 - traffic-log.txt lines: 54–63 | counters at the end: 0 / 0 / 0 / 0
 - check-log label: S2-A-v2 → INCONSISTENT; S2-both-v2 → INCONSISTENT
 - Notes: S2-A-v2: INCONSISTENT (expected by playbook); S2-both-v2: INCONSISTENT (expected by playbook)
+
+## S3 Backfill — 2026-11-02T22:00:07.628Z
+- Instances: v2 / v2 | git abe1cd0
+- Command (run by the human): node scripts/ia2/run.js official s3
+- traffic-log.txt lines: 80–81 | counters at the end: 0 / 0 / 0 / 0
+- check-log label: S3-before-backfill → CONSISTENT, but 20585 rows have no price_vnd yet — nothing may read price_vnd until they do; S3-partial → CONSISTENT, but 15585 rows have no price_vnd yet — nothing may read price_vnd until they do; S3-after-backfill → CONSISTENT
+- Notes: none

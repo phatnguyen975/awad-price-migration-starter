@@ -337,3 +337,23 @@ Check-log.txt lines 43–58 contain the two expected INCONSISTENT verdicts;
 docs/ledger.md lines 57–62 explicitly explain them. All traffic failure counters
 remained zero through the audit. The agent ran no official command and changed
 neither the raw logs nor the live database. Rehearsal was on scratch databases.
+
+## 2026-11-03 — Official S3 validation
+
+```
+Tool: Codex
+Asked for: Verify the human's completed S3 and guide the next step.
+Kept: Read-only audit of partial/resumed/idempotent backfill, final consistency, continuous traffic and the S3 ledger entry.
+Changed: nothing
+Rejected: nothing
+By hand: The human ran node scripts/ia2/run.js official s3 and reported completion.
+```
+
+S3 PASS: both instances remained v2. The three backfills reported STOPPED
+updated=5000 batches=10, DONE updated=15585 batches=32, and DONE updated=0
+batches=0. S3-after-backfill is CONSISTENT, with zero NULLs, nonintegers and
+disagreement. Evidence: check-log.txt lines 59–130, traffic-log.txt lines 80–81,
+docs/ledger.md lines 64–69. Earlier S3 checks had remaining NULLs, as expected.
+All traffic failure counters remained zero through the audit. The agent ran no
+official command and changed neither raw logs nor the live database. The earlier
+rehearsal used scratch databases and ports.
