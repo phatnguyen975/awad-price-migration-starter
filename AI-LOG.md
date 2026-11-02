@@ -357,3 +357,21 @@ docs/ledger.md lines 64–69. Earlier S3 checks had remaining NULLs, as expected
 All traffic failure counters remained zero through the audit. The agent ran no
 official command and changed neither raw logs nor the live database. The earlier
 rehearsal used scratch databases and ports.
+
+## 2026-11-03 — Official S4 validation
+
+```
+Tool: Codex
+Asked for: Verify the human's completed S4 and guide the rollback drill.
+Kept: Read-only audit of both v3 restarts, two strict consistency checks, continuous traffic and the S4 ledger entry.
+Changed: nothing
+Rejected: nothing
+By hand: The human ran node scripts/ia2/run.js official s4 and reported completion.
+```
+
+S4 PASS: both instances run v3, with exactly one down/back pair each in traffic
+lines 97–105. S4-A-v3 and S4-both-v3 are CONSISTENT with exit 0 (check-log.txt
+lines 131–146). The ledger matches at docs/ledger.md lines 71–76. All traffic
+failure counters remained zero through the audit. The agent ran no official
+command and changed neither raw logs nor the live database. The earlier
+rehearsal was run by the agent on scratch databases.

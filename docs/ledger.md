@@ -67,3 +67,10 @@ human; the agent has run no official-mode command and created no root log file.
 - traffic-log.txt lines: 80–81 | counters at the end: 0 / 0 / 0 / 0
 - check-log label: S3-before-backfill → CONSISTENT, but 20585 rows have no price_vnd yet — nothing may read price_vnd until they do; S3-partial → CONSISTENT, but 15585 rows have no price_vnd yet — nothing may read price_vnd until they do; S3-after-backfill → CONSISTENT
 - Notes: none
+
+## S4 Read price_vnd — 2026-11-02T22:01:53.172Z
+- Instances: v3 / v3 | git 29173be
+- Command (run by the human): node scripts/ia2/run.js official s4
+- traffic-log.txt lines: 97–105 | counters at the end: 0 / 0 / 0 / 0
+- check-log label: S4-A-v3 → CONSISTENT; S4-both-v3 → CONSISTENT
+- Notes: none
