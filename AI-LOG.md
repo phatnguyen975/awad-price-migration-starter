@@ -135,3 +135,19 @@ check, without looping. Under v2 traffic for 14 seconds, backfill completed and
 6336 requests succeeded with zero failures; final check was CONSISTENT.
 Evidence: `.ia2/build/backfill-checks.txt`, `.ia2/build/backfill-traffic.txt`.
 No v1 process was running. All databases and logs were scratch artifacts.
+
+## 2026-11-03 — v3 reads price_vnd
+
+```
+Tool: Codex
+Asked for: Build v3 with tests and smoke traffic before tagging.
+Kept: price_vnd SELECTs and derived legacy replies; orders remain in thousands; writes still maintain both columns. A disagreement test proves item/list/order reads use price_vnd.
+Changed: nothing
+Rejected: nothing
+By hand: nothing
+```
+
+Seven tests passed, including the original total=97 assertion. Eight seconds
+of scratch traffic at NEW_CLIENTS=0.3 completed 3636 requests with zero failures.
+The backfilled scratch database ended CONSISTENT. Evidence:
+`.ia2/build/v3-commands.txt`, `.ia2/build/v3-traffic.txt`.

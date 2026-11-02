@@ -69,3 +69,17 @@ test('invalid prices are rejected by both write paths', async () => {
     assert.equal((await call('PATCH', '/menu/1', body)).status, 400);
   }
 });
+
+test('item, list and order reads use price_vnd when columns disagree', async () => {
+  const { lastInsertRowid } = db.prepare('INSERT INTO menu_items(name, price, price_vnd) VALUES (?, ?, ?)').run('Read source', 1, 29000);
+  const id = Number(lastInsertRowid);
+  const r = await call('GET', `/menu/${id}`);
+  assert.equal(r.body.price, 29);
+  assert.equal(r.body.priceVnd, 29000);
+  const list = await call('GET', '/menu?limit=200');
+  assert.equal(list.body.find(item => item.id === id).price, 29);
+  const order = await call('POST', '/orders', { items: [{ menuItemId: id, qty: 2 }] });
+  assert.equal(order.status, 201);
+  assert.equal(order.body.total, 58);
+  assert.equal(db.prepare('SELECT unit_price FROM order_items WHERE order_id = ?').get(order.body.id).unit_price, 29);
+});

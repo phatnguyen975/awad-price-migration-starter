@@ -1,7 +1,7 @@
 import { createServer } from 'node:http';
 import { toVnd, toThousands } from './money.js';
 
-// v2 reads price and maintains both columns for every write.
+// v3 reads price_vnd and maintains both columns for safe rollback to v2.
 
 const json = (res, status, body) => {
   res.writeHead(status, { 'content-type': 'application/json' });
@@ -39,15 +39,15 @@ function parsePrice(body) {
 
 export function createApp(db) {
   const q = {
-    list: db.prepare('SELECT id, name, price FROM menu_items ORDER BY id LIMIT ? OFFSET ?'),
-    get: db.prepare('SELECT id, name, price FROM menu_items WHERE id = ?'),
+    list: db.prepare('SELECT id, name, price_vnd FROM menu_items ORDER BY id LIMIT ? OFFSET ?'),
+    get: db.prepare('SELECT id, name, price_vnd FROM menu_items WHERE id = ?'),
     insert: db.prepare('INSERT INTO menu_items (name, price, price_vnd) VALUES (?, ?, ?)'),
     setPrice: db.prepare('UPDATE menu_items SET price = ?, price_vnd = ? WHERE id = ?'),
     insertOrder: db.prepare("INSERT INTO orders (created_at) VALUES (datetime('now'))"),
     insertLine: db.prepare('INSERT INTO order_items (order_id, menu_item_id, qty, unit_price) VALUES (?, ?, ?, ?)'),
   };
 
-  const view = (row) => ({ id: row.id, name: row.name, price: row.price, priceVnd: toVnd(row.price) });
+  const view = (row) => ({ id: row.id, name: row.name, price: toThousands(row.price_vnd), priceVnd: row.price_vnd });
 
   async function handle(req, res) {
     const url = new URL(req.url, 'http://x');
@@ -97,8 +97,9 @@ export function createApp(db) {
         for (const { menuItemId, qty } of body.items) {
           const item = q.get.get(menuItemId);
           if (!item || !Number.isInteger(qty) || qty < 1) throw Object.assign(new Error(), { status: 400 });
-          q.insertLine.run(orderId, item.id, qty, item.price);
-          total += item.price * qty;
+          const unit = toThousands(item.price_vnd);
+          q.insertLine.run(orderId, item.id, qty, unit);
+          total += unit * qty;
         }
         db.exec('COMMIT');
         return json(res, 201, { id: Number(orderId), total: Math.round(total * 1000) / 1000 });
