@@ -436,3 +436,32 @@ Old-client probes passed on both instances. Evidence: check-log.txt lines
 Traffic failure counters remained zero through the audit. The agent ran no
 official command, edited no raw log and did not touch the live database.
 The earlier rehearsal used scratch databases and ports.
+
+## 2026-11-03 — Official S8 and whole-run validation
+
+```
+Tool: Codex
+Asked for: Verify the human's completed S8 and the final official evidence.
+Kept: Read-only audit of all nine steps, all check policies, down-tests, restart ordering, ledger and final traffic output.
+Changed: nothing
+Rejected: nothing
+By hand: The human ran node scripts/ia2/run.js official s8 and reported completion; the human ran every official command and explicitly approved G3a and G3b.
+```
+
+S8 and the whole official run PASS. Traffic ran continuously for about 893.9s,
+completed 421762 successful requests, and ended RESULT: zero failed requests.
+Counters: error=0, contract=0, stale=0, unavailable=0, rerouted=77. There was one
+traffic header, one change to 30% new clients and exactly 10 sequential restart
+pairs. All 18 check labels and down-tests 001/002/003 are present; strict and
+null-ok policies passed. Expected INCONSISTENT verdicts are preserved and
+explained in the ledger. S8 waited at least 30 seconds, ended traffic with SIGINT,
+then stopped both servers with SIGTERM. Final state has all pids null.
+
+Evidence: traffic-log.txt lines 1–200, FINAL/RESULT at 199–200; check-log.txt
+lines 1–219; docs/ledger.md S8 at lines 99–104. Backup time was 881ms; restore
+copy and check was 564ms. No frozen source, script, migration or test changed.
+The agent ran no official command, edited no raw log and did not touch the live
+database. The earlier rehearsal was run by the agent on scratch databases.
+
+A separate read-only audit report and SHA256 hashes were recorded under
+`.ia2/official-final-audit.json` before committing the two raw logs unchanged.

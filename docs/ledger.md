@@ -95,3 +95,10 @@ human; the agent has run no official-mode command and created no root log file.
 - traffic-log.txt lines: 182–182 | counters at the end: 0 / 0 / 0 / 0
 - check-log label: S7-backup → INCONSISTENT; S7-down-test-003 → CONSISTENT; S7-after-drop → CONSISTENT
 - Notes: S7-backup: INCONSISTENT (expected by playbook); VACUUM INTO backup=881ms; restore copy and check=564ms; file=/mnt/c/Users/Admin/Projects/awad-price-migration-starter/.ia2/backup-s7-1793657238486.db; Old-client probe passed on both instances: GET item/list, POST item, PATCH item, POST order
+
+## S8 Finish — 2026-11-02T22:08:45.059Z
+- Instances: v4 / v4 | git 36c623c
+- Command (run by the human): node scripts/ia2/run.js official s8
+- traffic-log.txt lines: 193–200 | counters at the end: 0 / 0 / 0 / 0
+- check-log label: none
+- Notes: none
