@@ -395,3 +395,23 @@ G3a has not been approved; S6 must wait for the human's explicit go. v4 stops
 maintaining price, so v1/v2 become unsafe after its writes. The agent ran no
 official command, touched no live database and edited no raw log. The earlier
 rehearsal used scratch databases and ports.
+
+## 2026-11-03 — G3a approval and official S6 validation
+
+```
+Tool: Codex
+Asked for: Proceed after explicit G3a approval, then verify the human's completed S6.
+Kept: S6 guidance and read-only audit of v4 deployment, expected stale legacy checks, traffic and the S6 ledger entry.
+Changed: nothing
+Rejected: nothing
+By hand: The human explicitly said go G3a, ran node scripts/ia2/run.js official s6 --go, and reported completion.
+```
+
+S6 PASS: both instances run v4, with one down/back pair each in traffic lines
+160–168. The cumulative run now has 10 down/back pairs and zero failure counters.
+S6-A-v4 and S6-both-v4 are INCONSISTENT with exit 1 because price is stale;
+price_vnd has no NULLs or nonintegers. These expected results are preserved in
+check-log.txt lines 171–186 and explained in docs/ledger.md lines 85–90.
+G3b has not been approved; S7 must wait for explicit approval before dropping
+price. The agent ran no official command and changed neither the live database
+nor raw logs. The earlier rehearsal was run on scratch databases and ports.

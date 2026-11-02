@@ -81,3 +81,10 @@ human; the agent has run no official-mode command and created no root log file.
 - traffic-log.txt lines: 117–134 | counters at the end: 0 / 0 / 0 / 0
 - check-log label: S5-before → CONSISTENT; S5-on-v2 → CONSISTENT; S5-after → CONSISTENT
 - Notes: none
+
+## S6 Point of no return — 2026-11-02T22:06:12.467Z
+- Instances: v4 / v4 | git c880370
+- Command (run by the human): node scripts/ia2/run.js official s6 --go
+- traffic-log.txt lines: 160–168 | counters at the end: 0 / 0 / 0 / 0
+- check-log label: S6-A-v4 → INCONSISTENT; S6-both-v4 → INCONSISTENT
+- Notes: S6-A-v4: INCONSISTENT (expected by playbook); S6-both-v4: INCONSISTENT (expected by playbook)
