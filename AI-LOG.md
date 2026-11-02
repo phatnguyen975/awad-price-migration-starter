@@ -80,3 +80,22 @@ By hand: The human approved G0 and authorized Phase 1 in chat.
 
 All required starter files were read. No unexpected difference was found.
 The earlier smoke rehearsal used scratch databases; no official command has run.
+
+## 2026-11-03 — Expand migration 002
+
+```
+Tool: Codex
+Asked for: Add migration 002 with its down migration and verify it before committing.
+Kept: Nullable INTEGER price_vnd with positive CHECK and no default; down drops only the new column.
+Changed: nothing
+Rejected: nothing
+By hand: nothing
+```
+
+On scratch expand.db, migrate applied 001 and 002, seed inserted 2000 rows,
+down reverted 002, status showed 002 pending, and check ended CONSISTENT.
+All four original tests passed with 002 present, demonstrating v1 compatibility.
+Lock: the runner takes SQLite BEGIN IMMEDIATE, reserving the writer; readers
+continue under WAL. Duration: one ALTER statement and constraint validation
+(proportional to existing rows), not an assumed fixed time. Running v1 expects
+only price, which remains available. The down loses price_vnd data.
