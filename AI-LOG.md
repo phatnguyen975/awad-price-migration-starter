@@ -602,3 +602,29 @@ The score arithmetic is 20+20+15+20+15+10=100. The package will be named
 23127449_100.zip, include .git, and exclude .ia2, data and node_modules.
 The human ran every official command; the agent's rehearsal and replay used
 scratch databases. No new official command or live-database access was needed.
+
+## 2026-11-03 — Submission archive build and validation
+
+```
+Tool: Codex
+Asked for: Complete the next step after the independent review and prepare the approved 100-point submission package.
+Kept: 23127449_100.zip, created from the repository root with .git and all submission files, excluding .ia2, data and node_modules.
+Changed: The archive is refreshed after committing this validation record so the delivered package includes the completed AI log.
+Rejected: nothing
+By hand: The human reported the independent review result and instructed continuing after the earlier packaging hold. The human remains responsible for uploading the zip.
+```
+
+The first archive was built after commit 0e10145 was pushed. Actual ZIP CRC
+validation passed; all 51 tracked files matched working-tree bytes, including
+both original official logs with their audited SHA256 hashes. Required documents,
+six migration SQL files, backfill and .git/HEAD were present at the archive root.
+No .ia2, data, node_modules, database files, .git/worktrees or Git alternates were
+included. A real extraction into /tmp passed clean Git status, matching main and
+all four annotated tags, and git fsck --full --no-dangling.
+
+This record is committed and pushed before the final archive refresh. The same
+byte/content/Git checks are repeated on that refreshed package; the final SHA256
+is reported separately rather than embedded inside its own archive. No official
+command, frozen code change, tag movement or raw-log edit was needed. Every
+official command was run by the human; rehearsal and replay used scratch data.
+The zip is ready for the human to submit after the refreshed-package check passes.
