@@ -115,3 +115,23 @@ Six tests passed. Eight seconds of scratch traffic at NEW_CLIENTS=0.3 completed
 4115 requests with zero failures. The check reported 1341 NULLs and zero
 disagreement, expected before backfill. Evidence: `.ia2/build/v2-traffic.txt`
 and `.ia2/build/v2-commands.txt`. Only src/ and test/ change application behavior.
+
+## 2026-11-03 — Resumable backfill
+
+```
+Tool: Codex
+Asked for: Implement and verify batched backfill before building v3.
+Kept: 500-row transactions, 50ms pauses, busy retries, explicit no-v1 flag, check.js selection predicate, progress and DONE/STOPPED summaries.
+Changed: The stored value uses the shared toVnd helper registered as a SQLite function. NULL source prices cause an explicit refusal, following the skill's stop-and-report requirement, rather than a silent skip.
+Rejected: nothing
+By hand: nothing
+```
+
+Scratch tests passed: missing confirm flag exits 2; intentional stale values
+produce INCONSISTENT; stop-after 3 reports STOPPED updated=1500 batches=3;
+resume completes; third run reports DONE updated=0 batches=0; check is CONSISTENT.
+A deliberately inserted NULL-source row caused exit 2 and remained visible to
+check, without looping. Under v2 traffic for 14 seconds, backfill completed and
+6336 requests succeeded with zero failures; final check was CONSISTENT.
+Evidence: `.ia2/build/backfill-checks.txt`, `.ia2/build/backfill-traffic.txt`.
+No v1 process was running. All databases and logs were scratch artifacts.
