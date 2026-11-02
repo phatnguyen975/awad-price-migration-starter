@@ -39,3 +39,10 @@ main without moving the version tags.
 Official run: not started. Official instances, traffic counters and check labels
 are not applicable to this gate entry. Every official command must be run by the
 human; the agent has run no official-mode command and created no root log file.
+
+## S0 Baseline — 2026-11-02T21:53:56.469Z
+- Instances: v1 / v1 | git 3ca58e0
+- Command (run by the human): node scripts/ia2/run.js official s0 --reset
+- traffic-log.txt lines: 1–3 | counters at the end: 0 / 0 / 0 / 0
+- check-log label: S0-baseline → CONSISTENT
+- Notes: none

@@ -280,3 +280,21 @@ git push origin v1 v2 v3 v4 successfully (four new tags). docs/ledger.md records
 the frozen tag SHAs and the human's gate approval. Code, scripts, migrations,
 tests and version tags are now frozen. No official command has run; all official
 commands will be run by the human. No force-push or history rewrite was used.
+
+## 2026-11-03 — Official setup and S0 validation
+
+```
+Tool: Codex
+Asked for: Guide the official run step by step and verify the human's completed setup and S0.
+Kept: The setup/S0 guidance, read-only validation of state, raw logs and the orchestrator's S0 ledger entry.
+Changed: nothing
+Rejected: nothing
+By hand: The human ran official setup and node scripts/ia2/run.js official s0 --reset, then reported completion.
+```
+
+S0 PASS: A/B run v1 on 3001/3002, one traffic header starts with new clients 0,
+S0-baseline is CONSISTENT with exit 0, and all failure counters are zero.
+Step evidence: traffic-log.txt lines 1–3, check-log.txt lines 1–5,
+docs/ledger.md lines 43–48. Subsequent traffic remained clean when inspected.
+The agent ran no official command, did not touch the live database, and did not
+write or edit either root log. The rehearsal was run earlier on scratch data.
