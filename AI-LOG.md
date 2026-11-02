@@ -255,3 +255,28 @@ Evidence: `.ia2/rehearsal/traffic-log.txt` lines 1–87 (FINAL/RESULT at 86–87
 `.ia2/state-rehearsal.json`. The summary records per-step durations and ranges,
 actual command sequence, tag SHAs, expected official counts, and the preserved
 Phase 0 negative smoke output. G2 has not been performed; no push has occurred.
+
+## 2026-11-03 — G2 freeze and initial push
+
+```
+Tool: Codex
+Asked for: Perform the ia2-git-flow freeze checks, then push main and annotated tags v1–v4 to the fork.
+Kept: Freeze verification, fresh worktree recreation, complete test matrix, authorized pushes and the G2 ledger entry with all four tag SHAs.
+Changed: nothing
+Rejected: nothing
+By hand: The human explicitly approved G2 and pushing in chat, and approved required sandbox escalation requests.
+```
+
+At clean main 9363c8262da8528eb9fd593249f63bc4d8ebe89d, all freeze conditions
+passed. Upstream was fetched; v1 still equals upstream/main. No version tag was
+already present on the fork before these authorized pushes. Exactly four local
+tags are annotated; their subjects, ancestry and the commit sequence passed.
+The four worktrees were recreated and verified, and tests passed with counts
+4/6/7/7/7 for v1/v2/v3/v4/main. Raw verification is in `.ia2/freeze-check.txt`.
+The previous rehearsal was run by the agent only on scratch databases and ports.
+
+The agent ran git push origin main successfully (2b889bd..9363c82), followed by
+git push origin v1 v2 v3 v4 successfully (four new tags). docs/ledger.md records
+the frozen tag SHAs and the human's gate approval. Code, scripts, migrations,
+tests and version tags are now frozen. No official command has run; all official
+commands will be run by the human. No force-push or history rewrite was used.
