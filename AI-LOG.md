@@ -207,3 +207,51 @@ check was CONSISTENT. No application file was changed in this migration commit.
 Phase 1 is ready for G1 review; G1 has not been approved. The full S0–S8
 rehearsal, freeze, push, and official run have not started. All verification in
 this phase was performed by the agent on scratch databases and ports.
+
+## 2026-11-03 — G1 approval and rehearsal start
+
+```
+Tool: Codex
+Asked for: Run rehearsal S0–S8, fix and repeat until clean, write the rehearsal summary, and stop before G2.
+Kept: Worktree recreation and verification; a fresh scratch rehearsal seeded with 20000 items.
+Changed: nothing
+Rejected: nothing
+By hand: The human approved G1 and authorized Phase 2 in chat.
+```
+
+The old Phase 0 scratch smoke output was copied intact to
+`.ia2/phase0-smoke-before-phase2/` before reset. S0 used the rehearsal-only
+--again option because the previous smoke state already marked S0 PASS.
+No official command has run; all official commands remain the human's role.
+
+## 2026-11-03 — Full rehearsal S0–S8 and summary
+
+```
+Tool: Codex
+Asked for: Complete rehearsal, fix and repeat until clean, document the result, and stop before G2.
+Kept: The first full S0–S8 rehearsal, raw scratch logs and ledger, independent log audit, and docs/rehearsal-summary.md.
+Changed: nothing
+Rejected: nothing
+By hand: The human approved the required sandbox escalation requests; every rehearsal command was run by the agent.
+```
+
+All nine steps passed on the first full rehearsal; no defect, code fix, retry,
+history rewrite or tag movement was needed. The agent used a scratch database,
+ports 4001/4002, and logs only under `.ia2/rehearsal/`. All official commands
+remain for the human; none has been run. No root evidence logs or data/app.db
+were created.
+
+Independent audit verified 18 check labels, three down-tests, one continuous
+traffic header, one share-change line, 10 sequential down/back pairs and zero
+failure counters. Final traffic: 130459 successful requests, rerouted=86,
+RESULT: zero failed requests. The traffic ran about 315 seconds; step timestamps
+span 317.130 seconds including command gaps. Backup took 395ms; restore copy
+and check took 457ms. Expected INCONSISTENT checks at S2/S3-before/S6/S7-backup
+are preserved and explained in the raw ledger and summary. All strict checks
+passed. Traffic stopped with SIGINT before both servers stopped with SIGTERM.
+
+Evidence: `.ia2/rehearsal/traffic-log.txt` lines 1–87 (FINAL/RESULT at 86–87),
+`.ia2/rehearsal/check-log.txt` lines 1–215, `.ia2/rehearsal/ledger.md`, and
+`.ia2/state-rehearsal.json`. The summary records per-step durations and ranges,
+actual command sequence, tag SHAs, expected official counts, and the preserved
+Phase 0 negative smoke output. G2 has not been performed; no push has occurred.
