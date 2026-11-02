@@ -522,3 +522,21 @@ match the actual executed script and raw execution artifacts. The claims sum to
 G4 or the final score yet. No zip has been created. Oral understanding is not
 claimed as independently verified; a concise rollback explanation will accompany
 the final review. Documents and audit are ready for the human's G4 decision.
+
+## 2026-11-03 — Provisional score revision pending independent review
+
+```
+Tool: Codex
+Asked for: Revise the draft to 100, then wait while the human opens another session for independent evaluation before finalizing the score or creating a zip.
+Kept: Existing implementation, raw logs, replay results, evidence references and disclosed limitations.
+Changed: The plan claim changed from 19/20 to 20/20 and the total from 99/100 to 100/100 in the report and audit. The earlier reserve required testing every undo combination, which the rubric does not require. Both documents now explicitly mark the score as provisional pending independent review and final human approval.
+Rejected: Treating the score revision as new experimental evidence, final score acceptance or permission to create the zip.
+By hand: The human agreed to revise the draft upward and explicitly requested a separate review session before any final score or zip decision.
+```
+
+No new official run or replay was needed for this scoring correction. Earlier
+99-point entries above are historical records and are preserved. No frozen
+source, migration, test, tag or raw evidence changed. G4 has not been approved;
+no zip is authorized or created. The agent will stop after saving and pushing
+this documentation change and wait for the independent review. The candidate
+name, only if 100 is later finalized, would be 23127449_100.zip.

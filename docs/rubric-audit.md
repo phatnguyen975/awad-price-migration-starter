@@ -4,27 +4,34 @@ Audited on 2026-11-03 against the unedited docs/ia2-requirements.md. Claims are
 based on implementation at the frozen tags, the original checker/traffic
 logic, human-run official evidence and an independent scratch replay.
 Machine-readable results: docs/evidence-audit.json. This is a self-assessment,
-not a statement of an awarded grade or an oral-exam result.
+not a statement of an awarded grade or an oral-exam result. The revised 100/100
+claim is provisional, pending independent session review and final human approval.
+G4 and zip creation are not authorized by this revision.
 
 ## Criterion-by-criterion findings
 
 | Criterion | Highest evidenced band | Conditions checked against actual artifacts | Proposed claim |
 | --- | --- | --- | ---: |
-| 1. Plan | 17–20 | MIGRATION.md has S0–S8 rows, schemas, A/B mixed states, concrete undo procedures/explicit irreversibility and conditional compatibility. S6 is named as the direct v1/v2 rollback boundary, distinct from S7 drop. Tag/migration inventory matches Git. | 19/20 |
+| 1. Plan | 17–20 | MIGRATION.md has S0–S8 rows, schemas, A/B mixed states, concrete undo procedures/explicit irreversibility and conditional compatibility. S6 is named as the direct v1/v2 rollback boundary, distinct from S7 drop. Tag/migration inventory matches Git. | 20/20 |
 | 2. Expand/dual write | 17–20 | 002 is a separate commit from v2. v1 continues serving after expand (check 6–13; clean traffic before v2). v2 SQL and bound parameters write both columns on POST and PATCH, confirmed by its six tests. Responses retain price and add priceVnd. All three up/down pairs exist; actual down outputs are check 14–42 and 195–212. | 20/20 |
 | 3. Backfill | 13–15 | Source limits batches to 500, commits each independently, pauses 50ms and retries busy locks. Selection repairs stale non-NULL values and NULLs. Both official instances are v2 before it runs (ledger 57–69). Actual stop/resume/zero-repeat and immediate CONSISTENT are check 67–130; traffic stays running at 80–81. | 15/15 |
 | 4. Zero failures | 17–20 | One official header at traffic 2; NEW_CLIENTS rises to 0.3 at 63 after both v2 restarts; one continuous file through 003 and S8. Exactly ten paired down/back transitions, never simultaneous outages. All ticks/final have four zero failure counters. FINAL=421762 ok, RESULT zero at 199–200. The disclosed patch does not alter counters or validation. | 20/20 |
 | 5. Way back | 13–15 | Actual v3→v2→v3 sequence is recorded in ledger 78–83, traffic 117–134 (four restarts), check 147–170 (all three strict verdicts). MIGRATION.md explains why v3 dual writing makes this safe and why v4→v2 is unsafe (check 171–186). | 15/15 |
 | 6. Contract | 9–10 | Both instances reached v4 before 003 (ledger 85–97). All six v4 prepared SQL statements avoid the old price column. 003 drops only after a NULL guard. Post-drop original check lists id/name/price_vnd and CONSISTENT (213–219). Official probes passed; independent replay logs actual numeric-price responses for every item endpoint on both ports (752–761), and later traffic is clean. | 10/10 |
-| **Total** | | **19+20+15+20+15+10** | **99/100** |
+| **Total** | | **20+20+15+20+15+10** | **100/100** |
 
-The one-point reserve on the plan is a conservative within-band judgment:
-S2 reversal and S3 abandonment are specified using tested deployment/down
-primitives, but not every combined undo path was separately executed under load.
-The rubric does not require every combination to be exercised. No other
-implementation requirement is knowingly absent, so there is no evidentiary basis
-for deducting whole bands merely because AI helped or because logs are generated
-by a real tool. A grader can reasonably choose another point within a band.
+The earlier 99/100 draft reserved one point because not every combined undo
+path was separately executed under load. That is not a required condition of
+the supplied rubric. Criterion 1 requires the four plan columns, the named
+point of no return and agreement with tags/migrations; criterion 5 requires the
+specific v3-to-v2-and-forward drill, which was demonstrated. The reserve was
+therefore removed when reassessing against the stated conditions, not because
+new experiments were performed or existing logs were changed.
+
+All stated top-band conditions currently have evidence, supporting a proposed
+20/20 for the plan and 100/100 overall. The limitations below remain disclosed;
+this draft is deliberately subject to an independent review before the human
+settles the score. The course remains responsible for the awarded mark.
 
 ## Why the evidence is more than printed PASS text
 
