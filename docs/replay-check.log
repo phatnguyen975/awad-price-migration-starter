@@ -1,0 +1,797 @@
++ set -euo pipefail
++ SOURCE_REPO=/mnt/c/Users/Admin/Projects/awad-price-migration-starter
+++ mktemp -d /tmp/ia2-replay.XXXXXX
++ REPLAY_BASE=/tmp/ia2-replay.3MN81r
++ git clone --no-hardlinks /mnt/c/Users/Admin/Projects/awad-price-migration-starter /tmp/ia2-replay.3MN81r/repo
+Cloning into '/tmp/ia2-replay.3MN81r/repo'...
+done.
++ cd /tmp/ia2-replay.3MN81r/repo
++ ROOT=/tmp/ia2-replay.3MN81r/repo
++ RUN=/tmp/ia2-replay.3MN81r/run
++ mkdir -p /tmp/ia2-replay.3MN81r/run
++ export DB_PATH=/tmp/ia2-replay.3MN81r/run/app.db
++ DB_PATH=/tmp/ia2-replay.3MN81r/run/app.db
++ for version in v1 v2 v3 v4
++ git checkout --detach v1
+HEAD is now at 2b889bd IA#2 starter: menu service for a zero-downtime migration
++ npm test
+
+> awad-price-migration-starter@1.0.0 test
+> node --test --test-reporter=spec
+
+✔ GET /menu/:id returns price in thousands of dong (23.513276ms)
+✔ PATCH /menu/:id changes the price (7.454536ms)
+✔ POST /orders totals at the current price (3.083191ms)
+✔ errors have one shape (5.799632ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 137.192028
++ for version in v1 v2 v3 v4
++ git checkout --detach v2
+Previous HEAD position was 2b889bd IA#2 starter: menu service for a zero-downtime migration
+HEAD is now at 7177248 feat(v2): dual write and priceVnd API
++ npm test
+
+> awad-price-migration-starter@1.0.0 test
+> node --test --test-reporter=spec
+
+✔ GET /menu/:id returns price in thousands of dong (22.452883ms)
+✔ PATCH /menu/:id changes the price (6.226896ms)
+✔ POST /orders totals at the current price (2.746891ms)
+✔ errors have one shape (4.107489ms)
+✔ old and new creates and patches maintain both columns (15.197935ms)
+✔ invalid prices are rejected by both write paths (16.892239ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 145.443913
++ for version in v1 v2 v3 v4
++ git checkout --detach v3
+Previous HEAD position was 7177248 feat(v2): dual write and priceVnd API
+HEAD is now at 10230e3 feat(v3): read price_vnd
++ npm test
+
+> awad-price-migration-starter@1.0.0 test
+> node --test --test-reporter=spec
+
+✔ GET /menu/:id returns price in thousands of dong (20.930813ms)
+✔ PATCH /menu/:id changes the price (7.802486ms)
+✔ POST /orders totals at the current price (2.897125ms)
+✔ errors have one shape (4.116417ms)
+✔ old and new creates and patches maintain both columns (14.092668ms)
+✔ invalid prices are rejected by both write paths (16.909074ms)
+✔ item, list and order reads use price_vnd when columns disagree (2.220497ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 138.454536
++ for version in v1 v2 v3 v4
++ git checkout --detach v4
+Previous HEAD position was 10230e3 feat(v3): read price_vnd
+HEAD is now at 01f6a26 feat(v4): use price_vnd only
++ npm test
+
+> awad-price-migration-starter@1.0.0 test
+> node --test --test-reporter=spec
+
+✔ GET /menu/:id returns price in thousands of dong (21.411791ms)
+✔ PATCH /menu/:id changes the price (6.217382ms)
+✔ POST /orders totals at the current price (3.355443ms)
+✔ errors have one shape (4.155073ms)
+✔ old and new creates and patches write only price_vnd (18.093133ms)
+✔ invalid prices are rejected by both write paths (15.752374ms)
+✔ item, list and order reads use price_vnd when columns disagree (3.444831ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 141.003119
++ git checkout main
+Previous HEAD position was 01f6a26 feat(v4): use price_vnd only
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
++ npm test
+
+> awad-price-migration-starter@1.0.0 test
+> node --test --test-reporter=spec
+
+✔ GET /menu/:id returns price in thousands of dong (22.775787ms)
+✔ PATCH /menu/:id changes the price (6.244891ms)
+✔ POST /orders totals at the current price (2.971056ms)
+✔ errors have one shape (3.746839ms)
+✔ old and new creates and patches write only price_vnd (16.654923ms)
+✔ invalid prices are rejected by both write paths (17.167993ms)
+✔ item, list and order reads use price_vnd when columns disagree (3.329559ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 147.481147
++ for version in v1 v2 v3 v4
++ git worktree add --detach ../ia2-v1 v1
+Preparing worktree (detached HEAD 2b889bd)
+HEAD is now at 2b889bd IA#2 starter: menu service for a zero-downtime migration
+++ git -C ../ia2-v1 rev-parse HEAD
+++ git rev-parse 'v1^{commit}'
++ test 2b889bde433190c17744f30d3900d38ab333a756 = 2b889bde433190c17744f30d3900d38ab333a756
++ for version in v1 v2 v3 v4
++ git worktree add --detach ../ia2-v2 v2
+Preparing worktree (detached HEAD 7177248)
+HEAD is now at 7177248 feat(v2): dual write and priceVnd API
+++ git -C ../ia2-v2 rev-parse HEAD
+++ git rev-parse 'v2^{commit}'
++ test 717724874239e236f8d6ae3417286d82130c5411 = 717724874239e236f8d6ae3417286d82130c5411
++ for version in v1 v2 v3 v4
++ git worktree add --detach ../ia2-v3 v3
+Preparing worktree (detached HEAD 10230e3)
+HEAD is now at 10230e3 feat(v3): read price_vnd
+++ git -C ../ia2-v3 rev-parse HEAD
+++ git rev-parse 'v3^{commit}'
++ test 10230e3b8d3804dcf9dae8e18612b55b3ae073b1 = 10230e3b8d3804dcf9dae8e18612b55b3ae073b1
++ for version in v1 v2 v3 v4
++ git worktree add --detach ../ia2-v4 v4
+Preparing worktree (detached HEAD 01f6a26)
+HEAD is now at 01f6a26 feat(v4): use price_vnd only
+++ git -C ../ia2-v4 rev-parse HEAD
+++ git rev-parse 'v4^{commit}'
++ test 01f6a26479df3eaeda2adaaba3df234ae0816601 = 01f6a26479df3eaeda2adaaba3df234ae0816601
++ TARGETS=http://localhost:4001,http://localhost:4002
++ TRAFFIC_PID=
++ trap cleanup EXIT
++ cd ../ia2-v1
++ npm run migrate
+
+> awad-price-migration-starter@1.0.0 migrate
+> node scripts/migrate.js up
+
+applied  001_init
++ npm run seed -- 20000
+
+> awad-price-migration-starter@1.0.0 seed
+> node scripts/seed.js 20000
+
+seeded 20000 menu items
++ deploy 4001 v1
++ local port=4001 version=v1 old_pid from
++ '[' -f /tmp/ia2-replay.3MN81r/run/traffic-log.txt ']'
++ from=0
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4001.pid ']'
++ printf '%s\n' 12851
++ health 4001
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4001/health
++ sleep 0.1
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4001/health
+{"ok":true}+ return 0
++ sleep 10
++ '[' -n '' ']'
++ deploy 4002 v1
++ local port=4002 version=v1 old_pid from
++ '[' -f /tmp/ia2-replay.3MN81r/run/traffic-log.txt ']'
++ from=0
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4002.pid ']'
++ printf '%s\n' 12863
++ health 4002
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4002/health
++ sleep 0.1
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4002/health
+{"ok":true}+ return 0
++ sleep 10
++ '[' -n '' ']'
++ printf '0\n'
++ TARGETS=http://localhost:4001,http://localhost:4002
++ LOG=/tmp/ia2-replay.3MN81r/run/traffic-log.txt
++ TRAFFIC_PID=12877
++ TRAFFIC_WRAPPER=12877
++ NEW_CLIENTS=0
++ sleep 6
++ NEW_CLIENTS_FILE=/tmp/ia2-replay.3MN81r/run/new-clients
++ DURATION=0
++ node scripts/traffic.js
++ check S0 strict
++ local label=S0 policy=strict code=0
++ printf '\nCHECK %s (%s)\n' S0 strict
+
+CHECK S0 (strict)
++ npm run --silent check
++ cat /tmp/ia2-replay.3MN81r/run/check-S0.txt
+columns                id, name, price
+rows                   20066
+CONSISTENT
++ test 0 -le 1
++ '[' strict = strict ']'
++ test 0 -eq 0
+++ tail -1 /tmp/ia2-replay.3MN81r/run/check-S0.txt
++ test CONSISTENT = CONSISTENT
++ cd ../ia2-v2
++ npm run migrate
+
+> awad-price-migration-starter@1.0.0 migrate
+> node scripts/migrate.js up
+
+applied  002_add_price_vnd
++ check S1 any
++ local label=S1 policy=any code=0
++ printf '\nCHECK %s (%s)\n' S1 any
+
+CHECK S1 (any)
++ npm run --silent check
++ cat /tmp/ia2-replay.3MN81r/run/check-S1.txt
+columns                id, name, price, price_vnd
+rows                   20068
+price_vnd_null         20068
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT, but 20068 rows have no price_vnd yet — nothing may read price_vnd until they do
++ test 0 -le 1
++ '[' any = strict ']'
++ deploy 4001 v2
++ local port=4001 version=v2 old_pid from
++ '[' -f /tmp/ia2-replay.3MN81r/run/traffic-log.txt ']'
+++ wc -l
++ from=3
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4001.pid ']'
+++ cat /tmp/ia2-replay.3MN81r/run/server-4001.pid
++ old_pid=12851
++ kill -TERM 12851
++ wait 12851
++ sleep 1
++ printf '%s\n' 12954
++ health 4001
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4001/health
++ sleep 0.1
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4001/health
+{"ok":true}+ return 0
++ sleep 10
++ '[' -n 12877 ']'
++ python3 - /tmp/ia2-replay.3MN81r/run/traffic-log.txt 3 4001
++ check S2-A any
++ local label=S2-A policy=any code=0
++ printf '\nCHECK %s (%s)\n' S2-A any
+
+CHECK S2-A (any)
++ npm run --silent check
++ code=1
++ cat /tmp/ia2-replay.3MN81r/run/check-S2-A.txt
+columns                id, name, price, price_vnd
+rows                   20182
+price_vnd_null         19715
+price_vnd_not_integer  0
+disagree               45
+INCONSISTENT
++ test 1 -le 1
++ '[' any = strict ']'
++ deploy 4002 v2
++ local port=4002 version=v2 old_pid from
++ '[' -f /tmp/ia2-replay.3MN81r/run/traffic-log.txt ']'
+++ wc -l
++ from=7
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4002.pid ']'
+++ cat /tmp/ia2-replay.3MN81r/run/server-4002.pid
++ old_pid=12863
++ kill -TERM 12863
++ wait 12863
++ sleep 1
++ printf '%s\n' 12993
++ health 4002
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4002/health
++ sleep 0.1
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4002/health
+{"ok":true}+ return 0
++ sleep 10
++ '[' -n 12877 ']'
++ python3 - /tmp/ia2-replay.3MN81r/run/traffic-log.txt 7 4002
++ check S2-both any
++ local label=S2-both policy=any code=0
++ printf '\nCHECK %s (%s)\n' S2-both any
+
+CHECK S2-both (any)
++ npm run --silent check
++ code=1
++ cat /tmp/ia2-replay.3MN81r/run/check-S2-both.txt
+columns                id, name, price, price_vnd
+rows                   20317
+price_vnd_null         19016
+price_vnd_not_integer  0
+disagree               21
+INCONSISTENT
++ test 1 -le 1
++ '[' any = strict ']'
++ printf '0.3\n'
++ sleep 2
++ grep 'new clients → 0.3' /tmp/ia2-replay.3MN81r/run/traffic-log.txt
+  30.7s new clients → 0.3
++ check S3-before any
++ local label=S3-before policy=any code=0
++ printf '\nCHECK %s (%s)\n' S3-before any
+
+CHECK S3-before (any)
++ npm run --silent check
++ code=1
++ cat /tmp/ia2-replay.3MN81r/run/check-S3-before.txt
+columns                id, name, price, price_vnd
+rows                   20345
+price_vnd_null         18939
+price_vnd_not_integer  0
+disagree               21
+INCONSISTENT
++ test 1 -le 1
++ '[' any = strict ']'
++ cd ../ia2-v3
++ node scripts/backfill-price-vnd.js --i-confirm-no-v1-writers --stop-after 10
+batch 1: 500 rows (total 500)
+batch 2: 500 rows (total 1000)
+batch 3: 500 rows (total 1500)
+batch 4: 500 rows (total 2000)
+batch 5: 500 rows (total 2500)
+batch 6: 500 rows (total 3000)
+batch 7: 500 rows (total 3500)
+batch 8: 500 rows (total 4000)
+batch 9: 500 rows (total 4500)
+batch 10: 500 rows (total 5000)
+STOPPED updated=5000 batches=10
++ check S3-partial any
++ local label=S3-partial policy=any code=0
++ printf '\nCHECK %s (%s)\n' S3-partial any
+
+CHECK S3-partial (any)
++ npm run --silent check
++ cat /tmp/ia2-replay.3MN81r/run/check-S3-partial.txt
+columns                id, name, price, price_vnd
+rows                   20352
+price_vnd_null         13956
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT, but 13956 rows have no price_vnd yet — nothing may read price_vnd until they do
++ test 0 -le 1
++ '[' any = strict ']'
++ cd ../ia2-v3
++ node scripts/backfill-price-vnd.js --i-confirm-no-v1-writers
+batch 1: 500 rows (total 500)
+batch 2: 500 rows (total 1000)
+batch 3: 500 rows (total 1500)
+batch 4: 500 rows (total 2000)
+batch 5: 500 rows (total 2500)
+batch 6: 500 rows (total 3000)
+batch 7: 500 rows (total 3500)
+batch 8: 500 rows (total 4000)
+batch 9: 500 rows (total 4500)
+batch 10: 500 rows (total 5000)
+batch 11: 500 rows (total 5500)
+batch 12: 500 rows (total 6000)
+batch 13: 500 rows (total 6500)
+batch 14: 500 rows (total 7000)
+batch 15: 500 rows (total 7500)
+batch 16: 500 rows (total 8000)
+batch 17: 500 rows (total 8500)
+batch 18: 500 rows (total 9000)
+batch 19: 500 rows (total 9500)
+batch 20: 500 rows (total 10000)
+batch 21: 500 rows (total 10500)
+batch 22: 500 rows (total 11000)
+batch 23: 500 rows (total 11500)
+batch 24: 500 rows (total 12000)
+batch 25: 500 rows (total 12500)
+batch 26: 500 rows (total 13000)
+batch 27: 500 rows (total 13500)
+batch 28: 456 rows (total 13956)
+DONE updated=13956 batches=28
++ check S3 strict
++ local label=S3 policy=strict code=0
++ printf '\nCHECK %s (%s)\n' S3 strict
+
+CHECK S3 (strict)
++ npm run --silent check
++ cat /tmp/ia2-replay.3MN81r/run/check-S3.txt
+columns                id, name, price, price_vnd
+rows                   20374
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT
++ test 0 -le 1
++ '[' strict = strict ']'
++ test 0 -eq 0
+++ tail -1 /tmp/ia2-replay.3MN81r/run/check-S3.txt
++ test CONSISTENT = CONSISTENT
++ cd ../ia2-v3
++ node scripts/backfill-price-vnd.js --i-confirm-no-v1-writers
++ cat /tmp/ia2-replay.3MN81r/run/idempotence.txt
+DONE updated=0 batches=0
+++ tail -1 /tmp/ia2-replay.3MN81r/run/idempotence.txt
++ test 'DONE updated=0 batches=0' = 'DONE updated=0 batches=0'
++ deploy 4001 v3
++ local port=4001 version=v3 old_pid from
++ '[' -f /tmp/ia2-replay.3MN81r/run/traffic-log.txt ']'
+++ wc -l
++ from=14
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4001.pid ']'
+++ cat /tmp/ia2-replay.3MN81r/run/server-4001.pid
++ old_pid=12954
++ kill -TERM 12954
++ wait 12954
++ sleep 1
++ printf '%s\n' 13141
++ health 4001
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4001/health
++ sleep 0.1
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4001/health
+{"ok":true}+ return 0
++ sleep 10
++ '[' -n 12877 ']'
++ python3 - /tmp/ia2-replay.3MN81r/run/traffic-log.txt 14 4001
++ check S4-A strict
++ local label=S4-A policy=strict code=0
++ printf '\nCHECK %s (%s)\n' S4-A strict
+
+CHECK S4-A (strict)
++ npm run --silent check
++ cat /tmp/ia2-replay.3MN81r/run/check-S4-A.txt
+columns                id, name, price, price_vnd
+rows                   20480
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT
++ test 0 -le 1
++ '[' strict = strict ']'
++ test 0 -eq 0
+++ tail -1 /tmp/ia2-replay.3MN81r/run/check-S4-A.txt
++ test CONSISTENT = CONSISTENT
++ deploy 4002 v3
++ local port=4002 version=v3 old_pid from
++ '[' -f /tmp/ia2-replay.3MN81r/run/traffic-log.txt ']'
+++ wc -l
++ from=18
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4002.pid ']'
+++ cat /tmp/ia2-replay.3MN81r/run/server-4002.pid
++ old_pid=12993
++ kill -TERM 12993
++ wait 12993
++ sleep 1
++ printf '%s\n' 13180
++ health 4002
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4002/health
++ sleep 0.1
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4002/health
+{"ok":true}+ return 0
++ sleep 10
++ '[' -n 12877 ']'
++ python3 - /tmp/ia2-replay.3MN81r/run/traffic-log.txt 18 4002
++ check S4 strict
++ local label=S4 policy=strict code=0
++ printf '\nCHECK %s (%s)\n' S4 strict
+
+CHECK S4 (strict)
++ npm run --silent check
++ cat /tmp/ia2-replay.3MN81r/run/check-S4.txt
+columns                id, name, price, price_vnd
+rows                   20599
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT
++ test 0 -le 1
++ '[' strict = strict ']'
++ test 0 -eq 0
+++ tail -1 /tmp/ia2-replay.3MN81r/run/check-S4.txt
++ test CONSISTENT = CONSISTENT
++ check S5-before strict
++ local label=S5-before policy=strict code=0
++ printf '\nCHECK %s (%s)\n' S5-before strict
+
+CHECK S5-before (strict)
++ npm run --silent check
++ cat /tmp/ia2-replay.3MN81r/run/check-S5-before.txt
+columns                id, name, price, price_vnd
+rows                   20600
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT
++ test 0 -le 1
++ '[' strict = strict ']'
++ test 0 -eq 0
+++ tail -1 /tmp/ia2-replay.3MN81r/run/check-S5-before.txt
++ test CONSISTENT = CONSISTENT
++ deploy 4001 v2
++ local port=4001 version=v2 old_pid from
++ '[' -f /tmp/ia2-replay.3MN81r/run/traffic-log.txt ']'
+++ wc -l
++ from=22
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4001.pid ']'
+++ cat /tmp/ia2-replay.3MN81r/run/server-4001.pid
++ old_pid=13141
++ kill -TERM 13141
++ wait 13141
++ sleep 1
++ printf '%s\n' 13243
++ health 4001
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4001/health
++ sleep 0.1
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4001/health
+{"ok":true}+ return 0
++ sleep 10
++ '[' -n 12877 ']'
++ python3 - /tmp/ia2-replay.3MN81r/run/traffic-log.txt 22 4001
++ deploy 4002 v2
++ local port=4002 version=v2 old_pid from
++ '[' -f /tmp/ia2-replay.3MN81r/run/traffic-log.txt ']'
+++ wc -l
++ from=26
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4002.pid ']'
+++ cat /tmp/ia2-replay.3MN81r/run/server-4002.pid
++ old_pid=13180
++ kill -TERM 13180
++ wait 13180
++ sleep 1
++ printf '%s\n' 13260
++ health 4002
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4002/health
++ sleep 0.1
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4002/health
+{"ok":true}+ return 0
++ sleep 10
++ '[' -n 12877 ']'
++ python3 - /tmp/ia2-replay.3MN81r/run/traffic-log.txt 26 4002
++ check S5-v2 strict
++ local label=S5-v2 policy=strict code=0
++ printf '\nCHECK %s (%s)\n' S5-v2 strict
+
+CHECK S5-v2 (strict)
++ npm run --silent check
++ cat /tmp/ia2-replay.3MN81r/run/check-S5-v2.txt
+columns                id, name, price, price_vnd
+rows                   20846
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT
++ test 0 -le 1
++ '[' strict = strict ']'
++ test 0 -eq 0
+++ tail -1 /tmp/ia2-replay.3MN81r/run/check-S5-v2.txt
++ test CONSISTENT = CONSISTENT
++ deploy 4001 v3
++ local port=4001 version=v3 old_pid from
++ '[' -f /tmp/ia2-replay.3MN81r/run/traffic-log.txt ']'
+++ wc -l
++ from=31
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4001.pid ']'
+++ cat /tmp/ia2-replay.3MN81r/run/server-4001.pid
++ old_pid=13243
++ kill -TERM 13243
++ wait 13243
++ sleep 1
++ printf '%s\n' 13298
++ health 4001
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4001/health
++ sleep 0.1
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4001/health
+{"ok":true}+ return 0
++ sleep 10
++ '[' -n 12877 ']'
++ python3 - /tmp/ia2-replay.3MN81r/run/traffic-log.txt 31 4001
++ deploy 4002 v3
++ local port=4002 version=v3 old_pid from
++ '[' -f /tmp/ia2-replay.3MN81r/run/traffic-log.txt ']'
+++ wc -l
++ from=35
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4002.pid ']'
+++ cat /tmp/ia2-replay.3MN81r/run/server-4002.pid
++ old_pid=13260
++ kill -TERM 13260
++ wait 13260
++ sleep 1
++ printf '%s\n' 13315
++ health 4002
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4002/health
++ sleep 0.1
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4002/health
+{"ok":true}+ return 0
++ sleep 10
++ '[' -n 12877 ']'
++ python3 - /tmp/ia2-replay.3MN81r/run/traffic-log.txt 35 4002
++ check S5-after strict
++ local label=S5-after policy=strict code=0
++ printf '\nCHECK %s (%s)\n' S5-after strict
+
+CHECK S5-after (strict)
++ npm run --silent check
++ cat /tmp/ia2-replay.3MN81r/run/check-S5-after.txt
+columns                id, name, price, price_vnd
+rows                   21089
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               0
+CONSISTENT
++ test 0 -le 1
++ '[' strict = strict ']'
++ test 0 -eq 0
+++ tail -1 /tmp/ia2-replay.3MN81r/run/check-S5-after.txt
++ test CONSISTENT = CONSISTENT
++ deploy 4001 v4
++ local port=4001 version=v4 old_pid from
++ '[' -f /tmp/ia2-replay.3MN81r/run/traffic-log.txt ']'
+++ wc -l
++ from=39
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4001.pid ']'
+++ cat /tmp/ia2-replay.3MN81r/run/server-4001.pid
++ old_pid=13298
++ kill -TERM 13298
++ wait 13298
++ sleep 1
++ printf '%s\n' 13374
++ health 4001
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4001/health
++ sleep 0.1
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4001/health
+{"ok":true}+ return 0
++ sleep 10
++ '[' -n 12877 ']'
++ python3 - /tmp/ia2-replay.3MN81r/run/traffic-log.txt 39 4001
++ check S6-A any
++ local label=S6-A policy=any code=0
++ printf '\nCHECK %s (%s)\n' S6-A any
+
+CHECK S6-A (any)
++ npm run --silent check
++ code=1
++ cat /tmp/ia2-replay.3MN81r/run/check-S6-A.txt
+columns                id, name, price, price_vnd
+rows                   21204
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               413
+INCONSISTENT
++ test 1 -le 1
++ '[' any = strict ']'
++ deploy 4002 v4
++ local port=4002 version=v4 old_pid from
++ '[' -f /tmp/ia2-replay.3MN81r/run/traffic-log.txt ']'
+++ wc -l
++ from=43
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4002.pid ']'
+++ cat /tmp/ia2-replay.3MN81r/run/server-4002.pid
++ old_pid=13315
++ kill -TERM 13315
++ wait 13315
++ sleep 1
++ printf '%s\n' 13412
++ health 4002
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4002/health
++ sleep 0.1
++ for attempt in {1..150}
++ curl --fail --silent http://localhost:4002/health
+{"ok":true}+ return 0
++ sleep 10
++ '[' -n 12877 ']'
++ python3 - /tmp/ia2-replay.3MN81r/run/traffic-log.txt 43 4002
++ check S6 any
++ local label=S6 policy=any code=0
++ printf '\nCHECK %s (%s)\n' S6 any
+
+CHECK S6 (any)
++ npm run --silent check
++ code=1
++ cat /tmp/ia2-replay.3MN81r/run/check-S6.txt
+columns                id, name, price, price_vnd
+rows                   21318
+price_vnd_null         0
+price_vnd_not_integer  0
+disagree               1112
+INCONSISTENT
++ test 1 -le 1
++ '[' any = strict ']'
++ node --input-type=module - /tmp/ia2-replay.3MN81r/run/backup.db
++ npm run migrate
+
+> awad-price-migration-starter@1.0.0 migrate
+> node scripts/migrate.js up
+
+applied  003_drop_price
++ check S7 strict
++ local label=S7 policy=strict code=0
++ printf '\nCHECK %s (%s)\n' S7 strict
+
+CHECK S7 (strict)
++ npm run --silent check
++ cat /tmp/ia2-replay.3MN81r/run/check-S7.txt
+columns                id, name, price_vnd
+rows                   21320
+price_vnd_null         0
+price_vnd_not_integer  0
+CONSISTENT
++ test 0 -le 1
++ '[' strict = strict ']'
++ test 0 -eq 0
+++ tail -1 /tmp/ia2-replay.3MN81r/run/check-S7.txt
++ test CONSISTENT = CONSISTENT
++ node --input-type=module
+{"port":4001,"method":"GET","path":"/menu/1","status":200,"body":{"id":1,"name":"Phở bò #1","price":54.5,"priceVnd":54500}}
+{"port":4001,"method":"GET","path":"/menu?limit=5","status":200,"body":[{"id":1,"name":"Phở bò #1","price":54.5,"priceVnd":54500},{"id":2,"name":"Bún chả #2","price":65,"priceVnd":65000},{"id":3,"name":"Cơm tấm #3","price":192,"priceVnd":192000},{"id":4,"name":"Bánh xèo #4","price":202,"priceVnd":202000},{"id":5,"name":"Gỏi cuốn #5","price":215.5,"priceVnd":215500}]}
+{"port":4001,"method":"POST","path":"/menu","status":201,"body":{"id":21322,"name":"Replay probe","price":29,"priceVnd":29000}}
+{"port":4001,"method":"PATCH","path":"/menu/21322","status":200,"body":{"id":21322,"name":"Replay probe","price":30,"priceVnd":30000}}
+{"port":4001,"method":"POST","path":"/orders","status":201,"body":{"id":9736,"total":54.5}}
+{"port":4002,"method":"GET","path":"/menu/1","status":200,"body":{"id":1,"name":"Phở bò #1","price":54.5,"priceVnd":54500}}
+{"port":4002,"method":"GET","path":"/menu?limit=5","status":200,"body":[{"id":1,"name":"Phở bò #1","price":54.5,"priceVnd":54500},{"id":2,"name":"Bún chả #2","price":65,"priceVnd":65000},{"id":3,"name":"Cơm tấm #3","price":192,"priceVnd":192000},{"id":4,"name":"Bánh xèo #4","price":202,"priceVnd":202000},{"id":5,"name":"Gỏi cuốn #5","price":215.5,"priceVnd":215500}]}
+{"port":4002,"method":"POST","path":"/menu","status":201,"body":{"id":21323,"name":"Replay probe","price":29,"priceVnd":29000}}
+{"port":4002,"method":"PATCH","path":"/menu/21323","status":200,"body":{"id":21323,"name":"Replay probe","price":30,"priceVnd":30000}}
+{"port":4002,"method":"POST","path":"/orders","status":201,"body":{"id":9744,"total":54.5}}
++ sleep 30
++ kill -INT 12877
++ wait 12877
++ TRAFFIC_PID=
++ cleanup
++ '[' -n '' ']'
++ for port in 4001 4002
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4001.pid ']'
+++ cat /tmp/ia2-replay.3MN81r/run/server-4001.pid
++ pid=13374
++ kill -0 13374
++ kill -TERM 13374
++ wait 13374
++ for port in 4001 4002
++ '[' -s /tmp/ia2-replay.3MN81r/run/server-4002.pid ']'
+++ cat /tmp/ia2-replay.3MN81r/run/server-4002.pid
++ pid=13412
++ kill -0 13412
++ kill -TERM 13412
++ wait 13412
++ trap - EXIT
++ python3 - /tmp/ia2-replay.3MN81r/run/traffic-log.txt
+INDEPENDENT REPLAY AUDIT PASS
+ 158.8s FINAL ok=81009 error=0 contract=0 stale=0 unavailable=0 rerouted=82
+RESULT: zero failed requests
++ for version in v1 v2 v3 v4
++ git worktree remove ../ia2-v1
++ for version in v1 v2 v3 v4
++ git worktree remove ../ia2-v2
++ for version in v1 v2 v3 v4
++ git worktree remove ../ia2-v3
++ for version in v1 v2 v3 v4
++ git worktree remove ../ia2-v4
++ git worktree prune
++ printf 'REPLAY_DIRECTORY=%s\n' /tmp/ia2-replay.3MN81r
+REPLAY_DIRECTORY=/tmp/ia2-replay.3MN81r

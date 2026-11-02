@@ -1,0 +1,56 @@
+
+=== traffic start 2026-11-02T22:14:58.841Z · targets http://localhost:4001 http://localhost:4002 · new clients 0
+   5.1s ok=2458 error=0 contract=0 stale=0 unavailable=0 rerouted=0
+   6.5s http://localhost:4001 down (ECONNREFUSED)
+   7.7s http://localhost:4001 back
+  10.1s ok=5172 error=0 contract=0 stale=0 unavailable=0 rerouted=10
+  15.1s ok=7541 error=0 contract=0 stale=0 unavailable=0 rerouted=10
+  17.8s http://localhost:4002 down (ECONNRESET)
+  19.0s http://localhost:4002 back
+  20.1s ok=10164 error=0 contract=0 stale=0 unavailable=0 rerouted=19
+  25.1s ok=12664 error=0 contract=0 stale=0 unavailable=0 rerouted=19
+  30.7s ok=15178 error=0 contract=0 stale=0 unavailable=0 rerouted=19
+  30.7s new clients → 0.3
+  35.7s ok=17279 error=0 contract=0 stale=0 unavailable=0 rerouted=19
+  36.1s http://localhost:4001 down (ECONNRESET)
+  37.3s http://localhost:4001 back
+  40.7s ok=19765 error=0 contract=0 stale=0 unavailable=0 rerouted=29
+  45.7s ok=22026 error=0 contract=0 stale=0 unavailable=0 rerouted=29
+  47.4s http://localhost:4002 down (UND_ERR_SOCKET)
+  48.6s http://localhost:4002 back
+  50.7s ok=24557 error=0 contract=0 stale=0 unavailable=0 rerouted=37
+  55.7s ok=26896 error=0 contract=0 stale=0 unavailable=0 rerouted=37
+  58.9s http://localhost:4001 down (ECONNRESET)
+  60.1s http://localhost:4001 back
+  60.7s ok=29740 error=0 contract=0 stale=0 unavailable=0 rerouted=46
+  66.2s ok=32348 error=0 contract=0 stale=0 unavailable=0 rerouted=46
+  70.6s http://localhost:4002 down (UND_ERR_SOCKET)
+  71.2s ok=35155 error=0 contract=0 stale=0 unavailable=0 rerouted=52
+  71.8s http://localhost:4002 back
+  76.2s ok=37716 error=0 contract=0 stale=0 unavailable=0 rerouted=53
+  81.2s ok=40383 error=0 contract=0 stale=0 unavailable=0 rerouted=53
+  81.9s http://localhost:4001 down (ECONNREFUSED)
+  83.2s http://localhost:4001 back
+  86.2s ok=42985 error=0 contract=0 stale=0 unavailable=0 rerouted=57
+  91.2s ok=45769 error=0 contract=0 stale=0 unavailable=0 rerouted=57
+  93.1s http://localhost:4002 down (ECONNRESET)
+  94.8s http://localhost:4002 back
+  96.8s ok=48520 error=0 contract=0 stale=0 unavailable=0 rerouted=64
+ 101.8s ok=51126 error=0 contract=0 stale=0 unavailable=0 rerouted=64
+ 105.1s http://localhost:4001 down (ECONNRESET)
+ 106.3s http://localhost:4001 back
+ 106.8s ok=53930 error=0 contract=0 stale=0 unavailable=0 rerouted=72
+ 111.8s ok=56675 error=0 contract=0 stale=0 unavailable=0 rerouted=72
+ 116.4s http://localhost:4002 down (ECONNRESET)
+ 116.8s ok=59332 error=0 contract=0 stale=0 unavailable=0 rerouted=77
+ 117.6s http://localhost:4002 back
+ 121.8s ok=61924 error=0 contract=0 stale=0 unavailable=0 rerouted=82
+ 126.8s ok=64576 error=0 contract=0 stale=0 unavailable=0 rerouted=82
+ 132.3s ok=67087 error=0 contract=0 stale=0 unavailable=0 rerouted=82
+ 137.3s ok=69579 error=0 contract=0 stale=0 unavailable=0 rerouted=82
+ 142.3s ok=72168 error=0 contract=0 stale=0 unavailable=0 rerouted=82
+ 147.3s ok=74909 error=0 contract=0 stale=0 unavailable=0 rerouted=82
+ 152.3s ok=77624 error=0 contract=0 stale=0 unavailable=0 rerouted=82
+ 157.3s ok=80243 error=0 contract=0 stale=0 unavailable=0 rerouted=82
+ 158.8s FINAL ok=81009 error=0 contract=0 stale=0 unavailable=0 rerouted=82
+RESULT: zero failed requests

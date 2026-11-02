@@ -465,3 +465,60 @@ database. The earlier rehearsal was run by the agent on scratch databases.
 
 A separate read-only audit report and SHA256 hashes were recorded under
 `.ia2/official-final-audit.json` before committing the two raw logs unchanged.
+
+## 2026-11-03 — Phase 4 documents, evidence audit and independent replay
+
+```
+Tool: Codex
+Asked for: Write the migration plan and explanation, review this log, audit the rubric accurately, draft self-assessment, verify replay and stop at G4 without fabricating evidence.
+Kept: MIGRATION.md, docs/explain.md, docs/rubric-audit.md, computed evidence-audit.json, the independent replay procedure and its raw transcripts, and the 99/100 self-assessment draft.
+Changed: SELF_ASSESSMENT_REPORT.md uses identity confirmed by the human. The plan and audit distinguish tested rollback paths from reasoned undo combinations and distinguish official probe assertions from independent replay response bodies.
+Rejected: Treating a printed PASS line alone as proof; each claim was checked against source, Git objects, raw outputs, actual tests and replay responses.
+By hand: The human requested the evidence-based audit and explicitly confirmed 23127449 — Nguyễn Tấn Phát for the report and zip name. The human ran every official command in Phase 3.
+```
+
+The agent cloned committed code at 3a682e3 to /tmp/ia2-replay.3MN81r/repo, tested
+v1/v2/v3/v4/main (4/6/7/7/7 passes), and independently replayed the full migration
+through drop without scripts/ia2/run.js. Actual commands, health probes, check
+outputs and ten post-drop JSON responses are preserved in docs/replay-check.log.
+The scratch traffic completed 81009 requests with zero failures and ten restart
+pairs. It is separate from the human's official run and did not open data/app.db.
+The exact executed shell script is preserved in docs/replay.sh; raw replay
+traffic is docs/replay-traffic-log.txt. The replay exited 0 and removed its own
+worktrees. No application/script/migration/test or tag was changed.
+
+Fresh audit re-read all official log policies and SHA256 hashes, compared the
+raw logs with first evidence commit 3a682e3, verified annotated tags/ancestry and
+protected-file diffs, and parsed the replay's actual HTTP responses. The six
+claims are 19/20,20/20,15/15,20/20,15/15,10/10 = 99/100. The plan reserves one
+point because not every combined undo procedure was separately exercised under
+traffic; no missing implementation band was invented to lower the total.
+The runtime traffic extension and limits of finite tests are explicitly disclosed.
+
+During final AI-log review, an earlier local S3 audit parser mistake was identified
+in the session: it split a CHECK header's closing delimiter as if it were a new
+block. The extraction was corrected, and the re-run audit passed before S4 guidance.
+This was an agent audit-script error, not an official command or database failure.
+No raw log or frozen code was changed to hide it. The student was asked to read
+docs/explain.md and explain the v3/v2 versus v4/v2 rollback boundary in their own
+words; no oral-readiness claim is made without their answer. G4 is not approved.
+
+## 2026-11-03 — Pre-G4 cleanup and review state
+
+```
+Tool: Codex
+Asked for: Finish Phase 4 evidence preparation and stop at G4.
+Kept: Final document validation, score arithmetic, original-log hash comparison, removal of four stopped sibling worktrees, and worktree pruning.
+Changed: The S3 plan cell spells out its abandonment command instead of relying on the S2 row.
+Rejected: nothing
+By hand: The human confirmed the report identity and declined a written oral-practice answer, requesting a short recap in the final response instead.
+```
+
+Only the main checkout remains; .git/worktrees is absent or empty. Ignore rules
+match both .ia2 state and data/app.db. Frozen code and tags remain unchanged.
+Official logs match their original committed bytes; supplemental replay files
+match the actual executed script and raw execution artifacts. The claims sum to
+99, so the proposed artifact name is 23127449_99.zip. The student has not approved
+G4 or the final score yet. No zip has been created. Oral understanding is not
+claimed as independently verified; a concise rollback explanation will accompany
+the final review. Documents and audit are ready for the human's G4 decision.

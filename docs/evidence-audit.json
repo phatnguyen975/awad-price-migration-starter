@@ -1,0 +1,217 @@
+{
+  "result": "PASS",
+  "evidence_commit": "3a682e3",
+  "official_sha256": {
+    "traffic-log.txt": "f87c7d1c28ff36a4fff33c66698d7043e193e4bc0eac530cf1d792f7f87bccdc",
+    "check-log.txt": "4feb4671d403a2ad8edc397262160f863669cd64492302725fc78d337d67a9fc"
+  },
+  "official_traffic_lines": 200,
+  "official_check_lines": 219,
+  "official_final": " 893.9s FINAL ok=421762 error=0 contract=0 stale=0 unavailable=0 rerouted=77",
+  "down_count": 10,
+  "back_count": 10,
+  "checks": {
+    "S0-baseline": {
+      "lines": [
+        1,
+        5
+      ],
+      "policy": "strict",
+      "verdict": "CONSISTENT",
+      "exit": 0
+    },
+    "S1-expand": {
+      "lines": [
+        6,
+        13
+      ],
+      "policy": "null-ok",
+      "verdict": "CONSISTENT, but 21127 rows have no price_vnd yet \u2014 nothing may read price_vnd until they do",
+      "exit": 0
+    },
+    "S1-down-test-002": {
+      "lines": [
+        38,
+        42
+      ],
+      "policy": "strict",
+      "verdict": "CONSISTENT",
+      "exit": 0
+    },
+    "S2-A-v2": {
+      "lines": [
+        43,
+        50
+      ],
+      "policy": "any",
+      "verdict": "INCONSISTENT",
+      "exit": 1
+    },
+    "S2-both-v2": {
+      "lines": [
+        51,
+        58
+      ],
+      "policy": "any",
+      "verdict": "INCONSISTENT",
+      "exit": 1
+    },
+    "S3-before-backfill": {
+      "lines": [
+        59,
+        66
+      ],
+      "policy": "any",
+      "verdict": "CONSISTENT, but 20585 rows have no price_vnd yet \u2014 nothing may read price_vnd until they do",
+      "exit": 0
+    },
+    "S3-partial": {
+      "lines": [
+        79,
+        86
+      ],
+      "policy": "any",
+      "verdict": "CONSISTENT, but 15585 rows have no price_vnd yet \u2014 nothing may read price_vnd until they do",
+      "exit": 0
+    },
+    "S3-after-backfill": {
+      "lines": [
+        121,
+        128
+      ],
+      "policy": "strict",
+      "verdict": "CONSISTENT",
+      "exit": 0
+    },
+    "S4-A-v3": {
+      "lines": [
+        131,
+        138
+      ],
+      "policy": "strict",
+      "verdict": "CONSISTENT",
+      "exit": 0
+    },
+    "S4-both-v3": {
+      "lines": [
+        139,
+        146
+      ],
+      "policy": "strict",
+      "verdict": "CONSISTENT",
+      "exit": 0
+    },
+    "S5-before": {
+      "lines": [
+        147,
+        154
+      ],
+      "policy": "strict",
+      "verdict": "CONSISTENT",
+      "exit": 0
+    },
+    "S5-on-v2": {
+      "lines": [
+        155,
+        162
+      ],
+      "policy": "strict",
+      "verdict": "CONSISTENT",
+      "exit": 0
+    },
+    "S5-after": {
+      "lines": [
+        163,
+        170
+      ],
+      "policy": "strict",
+      "verdict": "CONSISTENT",
+      "exit": 0
+    },
+    "S6-A-v4": {
+      "lines": [
+        171,
+        178
+      ],
+      "policy": "any",
+      "verdict": "INCONSISTENT",
+      "exit": 1
+    },
+    "S6-both-v4": {
+      "lines": [
+        179,
+        186
+      ],
+      "policy": "any",
+      "verdict": "INCONSISTENT",
+      "exit": 1
+    },
+    "S7-backup": {
+      "lines": [
+        187,
+        194
+      ],
+      "policy": "any",
+      "verdict": "INCONSISTENT",
+      "exit": 1
+    },
+    "S7-down-test-003": {
+      "lines": [
+        205,
+        212
+      ],
+      "policy": "strict",
+      "verdict": "CONSISTENT",
+      "exit": 0
+    },
+    "S7-after-drop": {
+      "lines": [
+        213,
+        219
+      ],
+      "policy": "strict",
+      "verdict": "CONSISTENT",
+      "exit": 0
+    }
+  },
+  "tags": {
+    "v1": {
+      "commit": "2b889bde433190c17744f30d3900d38ab333a756",
+      "migration_files": [
+        "migrations/001_init.down.sql",
+        "migrations/001_init.up.sql"
+      ]
+    },
+    "v2": {
+      "commit": "717724874239e236f8d6ae3417286d82130c5411",
+      "migration_files": [
+        "migrations/001_init.down.sql",
+        "migrations/001_init.up.sql",
+        "migrations/002_add_price_vnd.down.sql",
+        "migrations/002_add_price_vnd.up.sql"
+      ]
+    },
+    "v3": {
+      "commit": "10230e3b8d3804dcf9dae8e18612b55b3ae073b1",
+      "migration_files": [
+        "migrations/001_init.down.sql",
+        "migrations/001_init.up.sql",
+        "migrations/002_add_price_vnd.down.sql",
+        "migrations/002_add_price_vnd.up.sql"
+      ]
+    },
+    "v4": {
+      "commit": "01f6a26479df3eaeda2adaaba3df234ae0816601",
+      "migration_files": [
+        "migrations/001_init.down.sql",
+        "migrations/001_init.up.sql",
+        "migrations/002_add_price_vnd.down.sql",
+        "migrations/002_add_price_vnd.up.sql"
+      ]
+    }
+  },
+  "independent_replay_final": " 158.8s FINAL ok=81009 error=0 contract=0 stale=0 unavailable=0 rerouted=82",
+  "independent_probe_responses": 10,
+  "frozen_code_unchanged": true,
+  "original_checker_seed_migrator_readme_001_unchanged": true
+}
