@@ -74,3 +74,10 @@ human; the agent has run no official-mode command and created no root log file.
 - traffic-log.txt lines: 97–105 | counters at the end: 0 / 0 / 0 / 0
 - check-log label: S4-A-v3 → CONSISTENT; S4-both-v3 → CONSISTENT
 - Notes: none
+
+## S5 Rollback drill — 2026-11-02T22:03:38.335Z
+- Instances: v3 / v3 | git 24f661c
+- Command (run by the human): node scripts/ia2/run.js official s5
+- traffic-log.txt lines: 117–134 | counters at the end: 0 / 0 / 0 / 0
+- check-log label: S5-before → CONSISTENT; S5-on-v2 → CONSISTENT; S5-after → CONSISTENT
+- Notes: none

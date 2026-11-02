@@ -375,3 +375,23 @@ lines 131–146). The ledger matches at docs/ledger.md lines 71–76. All traffi
 failure counters remained zero through the audit. The agent ran no official
 command and changed neither raw logs nor the live database. The earlier
 rehearsal was run by the agent on scratch databases.
+
+## 2026-11-03 — Official S5 validation and G3a review
+
+```
+Tool: Codex
+Asked for: Verify the human's completed S5 and guide the next gated step.
+Kept: Read-only audit of rollback/forward restarts, all three strict checks, continuous traffic and the S5 ledger entry.
+Changed: nothing
+Rejected: nothing
+By hand: The human ran node scripts/ia2/run.js official s5 and reported completion.
+```
+
+S5 PASS: v3 to v2 and forward to v3 completed under continuous traffic, with
+four sequential down/back pairs (traffic lines 117–134) and zero failures.
+S5-before, S5-on-v2 and S5-after are CONSISTENT with exit 0 (check lines 147–170).
+Both instances are back on v3. The ledger matches at lines 78–83.
+G3a has not been approved; S6 must wait for the human's explicit go. v4 stops
+maintaining price, so v1/v2 become unsafe after its writes. The agent ran no
+official command, touched no live database and edited no raw log. The earlier
+rehearsal used scratch databases and ports.
